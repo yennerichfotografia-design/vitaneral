@@ -2092,7 +2092,7 @@ button:focus-visible,
     gap: 16px;
   }
   .solution-scroll__video {
-    max-width: 50%;
+    max-width: 85%;
     margin: 0 auto;
   }
   .solution-scroll__content {
