@@ -392,7 +392,18 @@ button:focus-visible,
 }
 .navbar__mobile.active { display: block; }
 .navbar__mobile ul { display: flex; flex-direction: column; gap: 16px; }
-.navbar__mobile a { font-size: 1.1rem; color: var(--gray-700); font-weight: 500; }
+.navbar__mobile a {
+  font-size: 1.1rem;
+  color: var(--gray-700);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.navbar__mobile a svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
 
 @media (min-width: 768px) {
   .navbar__cta { display: inline-flex; }
