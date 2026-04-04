@@ -417,22 +417,18 @@ function initMobileProductSwap() {
   const backImg = document.querySelector('.hero__product-img--back');
   if (!frontImg || !backImg) return;
 
-  ScrollTrigger.create({
-    trigger: '#hero',
-    start: 'top top',
-    end: '+=150%',
-    pin: true,
-    scrub: 1,
-    onUpdate: (self) => {
-      if (self.progress > 0.4) {
-        frontImg.classList.add('hide');
-        backImg.classList.add('show');
-      } else {
-        frontImg.classList.remove('hide');
-        backImg.classList.remove('show');
-      }
-    },
-  });
+  let showingBack = false;
+
+  setInterval(() => {
+    showingBack = !showingBack;
+    if (showingBack) {
+      frontImg.classList.add('hide');
+      backImg.classList.add('show');
+    } else {
+      frontImg.classList.remove('hide');
+      backImg.classList.remove('show');
+    }
+  }, 3500);
 }
 
 /* ============================================
