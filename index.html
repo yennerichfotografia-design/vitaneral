@@ -725,8 +725,15 @@
     </div>
   </section>
 
-  <!-- IMAGEN LIFESTYLE FULL WIDTH CON PARALLAX -->
-  <div class="parallax-section" id="lifestyleImg" style="background-image: url('Imagenes/Mujer.webp');" role="img" aria-label="Mujer preparando Vitaneral"></div>
+  <!-- IMAGEN LIFESTYLE FULL WIDTH -->
+  <div class="parallax-section" id="lifestyleImg">
+    <picture>
+      <source media="(max-width: 768px)" srcset="Imagenes/mujer-mobile.webp" type="image/webp">
+      <source media="(max-width: 768px)" srcset="Imagenes/mujer-mobile.png">
+      <source srcset="Imagenes/Mujer.webp" type="image/webp">
+      <img src="Imagenes/Mujer.png" alt="Mujer preparando Vitaneral" class="parallax-section__img">
+    </picture>
+  </div>
 
   <!-- 12. CTA FINAL -->
   <section class="section section--cta" id="cta-final">
