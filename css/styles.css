@@ -1647,12 +1647,28 @@ button:focus-visible,
     height: auto;
     min-height: 280px;
     padding: 20px 0;
+    position: relative;
+  }
+  .hero__3d::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(243,150,0,0.2) 0%, rgba(243,150,0,0.08) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
   .hero__3d-fallback {
     max-width: 340px;
+    position: relative;
+    z-index: 1;
   }
   .hero__product-img {
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 15px 40px rgba(243,150,0,0.25)) drop-shadow(0 8px 20px rgba(0,0,0,0.3));
   }
   .hero__title-logo {
     max-width: 220px;
