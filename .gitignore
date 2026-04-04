@@ -1,0 +1,15 @@
+# Backups
+backup_v*/
+
+# System
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Assets no web
+Video/
+brand/
+*.pdf
+extract.sh
+Imagenes/Fotos para video/
