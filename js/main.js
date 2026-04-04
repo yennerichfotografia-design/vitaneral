@@ -428,7 +428,7 @@ function initMobileProductSwap() {
       frontImg.classList.remove('hide');
       backImg.classList.remove('show');
     }
-  }, 3500);
+  }, 2500);
 }
 
 /* ============================================
