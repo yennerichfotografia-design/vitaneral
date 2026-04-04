@@ -1576,7 +1576,11 @@ button:focus-visible,
 }
 @media (max-width: 768px) {
   .parallax-section {
-    height: 300px;
+    height: auto;
+  }
+  .parallax-section__img {
+    object-fit: contain;
+    height: auto;
   }
 }
 
