@@ -1849,6 +1849,7 @@ button:focus-visible,
   }
 
   /* Wave dividers smaller on mobile */
+  .wave-divider { margin-top: -1px; margin-bottom: -1px; }
   .wave-divider svg { height: 30px; }
 }
 
