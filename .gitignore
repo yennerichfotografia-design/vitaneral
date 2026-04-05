@@ -8,7 +8,8 @@ backup_v*/
 node_modules/
 
 # Assets no web
-Video/
+Video/video vitaneral desktop.mp4
+Video/vitaneral_scroll.mp4
 brand/
 *.pdf
 extract.sh

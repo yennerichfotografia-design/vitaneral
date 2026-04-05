@@ -553,120 +553,7 @@ button:focus-visible,
 .hero__badge-item strong {
   color: var(--white);
 }
-.hero__stats {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 48px;
-  padding: 28px 0;
-  border-top: 1px solid rgba(255,255,255,0.15);
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-.hero__stat { text-align: center; }
-.hero__stat-number {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: var(--primary-light);
-  line-height: 1;
-}
-.hero__stat-unit {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--primary-light);
-}
-.hero__stat-label {
-  display: block;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.5);
-  margin-top: 6px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 
-/* Hero Product */
-.hero__3d {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero__3d canvas {
-  display: none !important;
-}
-.hero__3d-fallback {
-  display: block !important;
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
-  position: relative;
-  animation: floatProduct 3s ease-in-out infinite;
-}
-.hero__3d-fallback picture {
-  display: block;
-  width: 100%;
-}
-.hero__product-img {
-  width: 100%;
-  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.08));
-  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.hero__product-img--front {
-  position: relative;
-  z-index: 2;
-}
-.hero__product-img--back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  z-index: 1;
-  transform: scale(0.6) rotateY(-90deg);
-}
-.hero__product-img--front.hide {
-  opacity: 0;
-  transform: scale(0.6) rotateY(90deg);
-  z-index: 1;
-}
-.hero__product-img--back.show {
-  opacity: 1;
-  transform: scale(1) rotateY(0deg);
-  z-index: 3;
-  filter: drop-shadow(0 20px 50px rgba(243,150,0,0.3));
-}
-@keyframes floatProduct {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-15px) rotate(1deg); }
-}
-
-/* Logo merge overlay */
-.hero__logo-merge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  opacity: 0;
-}
-.hero__logo-merge-img {
-  width: 350px;
-  height: auto;
-  filter: drop-shadow(0 0 40px rgba(243,150,0,0.6));
-}
-.hero__logo-flash {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(243,150,0,0.5) 0%, rgba(255,215,0,0.2) 30%, transparent 70%);
-  opacity: 0;
-  pointer-events: none;
-}
 
 /* Scroll indicator */
 .hero__scroll-indicator {
@@ -760,147 +647,6 @@ button:focus-visible,
   margin-bottom: 48px;
   flex-wrap: wrap;
 }
-.solution__card {
-  flex: 1;
-  max-width: 380px;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 48px 36px;
-  text-align: center;
-  box-shadow: none;
-  transition: var(--transition);
-  border: 1px solid var(--gray-100);
-}
-.solution__card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
-  border-color: rgba(243,150,0,0.2);
-}
-.solution__card-icon {
-  color: var(--primary);
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-}
-.solution__card h3 {
-  font-size: 1.6rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: var(--primary);
-}
-.solution__card p {
-  color: var(--gray-500);
-  font-size: 1rem;
-}
-.solution__plus {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--primary);
-}
-.solution__hmb-img {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.solution__hmb-badge {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-}
-.solution__result {
-  background: var(--white);
-  border-radius: var(--radius);
-  padding: 40px;
-  text-align: center;
-  border: 1px solid var(--gray-100);
-  max-width: 600px;
-  margin: 0 auto;
-  box-shadow: var(--shadow);
-  border-left: 4px solid var(--primary);
-}
-.solution__result h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: var(--gray-900);
-}
-.solution__result ul {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.solution__result li {
-  font-size: 1rem;
-  color: var(--gray-700);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.solution__result li::before {
-  content: '→';
-  color: var(--primary);
-  font-weight: 700;
-}
-
-/* ============================================
-   04. HMB
-   ============================================ */
-.hmb__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  margin-bottom: 48px;
-}
-.hmb__block {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius);
-  padding: 40px;
-}
-.hmb__block h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: var(--primary-light);
-}
-.hmb__block ul { display: flex; flex-direction: column; gap: 16px; }
-.hmb__block li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 1rem;
-  color: rgba(255,255,255,0.8);
-  line-height: 1.5;
-}
-.hmb__bullet {
-  flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
-  margin-top: 8px;
-}
-.hmb__seal {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  padding: 32px;
-  background: rgba(243,150,0,0.06);
-  border-radius: var(--radius);
-  border: 1px solid rgba(243,150,0,0.12);
-}
-.hmb__seal-img {
-  flex-shrink: 0;
-  width: 160px;
-  height: auto;
-}
-.hmb__seal p {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.7);
-}
-
 /* ============================================
    04. HMB HERO — Split layout
    ============================================ */
@@ -1137,7 +883,11 @@ button:focus-visible,
 /* ============================================
    07. SABORES
    ============================================ */
+/* Old flavor grid removed — using flavor-hero now */
 .flavors__grid {
+  display: none;
+}
+.flavors__grid-old {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
@@ -2017,24 +1767,12 @@ button:focus-visible,
   .solution__result { padding: 24px 20px; }
   .solution__hmb-badge { max-width: 100%; }
 
-  .hmb__grid { grid-template-columns: 1fr; gap: 16px; }
-  .hmb__block { padding: 24px 20px; }
-  .hmb__seal {
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
-    padding: 24px 20px;
-  }
-  .hmb__seal-img { width: 120px; }
 
   .benefits__grid { grid-template-columns: 1fr; gap: 16px; }
   .benefit__card { padding: 24px 20px; }
   .benefit__card h3 { font-size: 1rem; }
   .benefit__card p { font-size: 0.85rem; }
 
-  .flavors__grid { grid-template-columns: 1fr; gap: 16px; }
-  .flavor__info { padding: 20px; }
-  .flavor__info h3 { font-size: 1.2rem; }
 
   .testimonials__grid { grid-template-columns: 1fr; gap: 16px; }
   .testimonial__card { padding: 24px 20px; }

@@ -31,11 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initRevealAnimations();
   initHeroAnimations();
-  initCounters();
   initFAQ();
   initParallax();
   initFlavorHover();
-  initMobileProductSwap();
   initFloatingCta();
   initNutriTabs();
   initScrollProgress();
@@ -256,35 +254,6 @@ function initRevealAnimations() {
 }
 
 /* ============================================
-   COUNTER ANIMATION
-   ============================================ */
-function initCounters() {
-  const stats = document.querySelectorAll('.hero__stat-number');
-
-  stats.forEach(stat => {
-    const target = parseFloat(stat.dataset.count);
-    const decimals = parseInt(stat.dataset.decimals) || 0;
-
-    ScrollTrigger.create({
-      trigger: stat,
-      start: 'top 90%',
-      onEnter: () => {
-        gsap.to(stat, {
-          duration: 1.5,
-          ease: 'power2.out',
-          onUpdate: function() {
-            const progress = this.progress();
-            const value = target * progress;
-            stat.textContent = value.toFixed(decimals);
-          },
-        });
-      },
-      once: true,
-    });
-  });
-}
-
-/* ============================================
    FAQ ACCORDION
    ============================================ */
 function initFAQ() {
@@ -365,29 +334,6 @@ function initFlavorHover() {
   });
 }
 
-/* ============================================
-   MOBILE PRODUCT SWAP ON SCROLL
-   ============================================ */
-function initMobileProductSwap() {
-  if (window.innerWidth >= 768) return;
-
-  const frontImg = document.querySelector('.hero__product-img--front');
-  const backImg = document.querySelector('.hero__product-img--back');
-  if (!frontImg || !backImg) return;
-
-  let showingBack = false;
-
-  setInterval(() => {
-    showingBack = !showingBack;
-    if (showingBack) {
-      frontImg.classList.add('hide');
-      backImg.classList.add('show');
-    } else {
-      frontImg.classList.remove('hide');
-      backImg.classList.remove('show');
-    }
-  }, 2500);
-}
 
 /* ============================================
    FLOATING CTA MOBILE
