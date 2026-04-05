@@ -30,8 +30,13 @@ class Hero3D {
     this.renderer.setClearColor(0x000000, 0);
     this.container.appendChild(this.renderer.domElement);
 
+    // 3D disabled — using product image fallback instead
     const fallback = document.getElementById('hero3d-fallback');
-    if (fallback) fallback.style.display = 'none';
+    if (fallback) fallback.style.display = 'block';
+    if (this.renderer.domElement.parentNode) {
+      this.renderer.domElement.parentNode.removeChild(this.renderer.domElement);
+    }
+    return;
 
     this.setupLights();
     this.loadProduct();

@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardTilt();
   initMagneticButtons();
   initTextSplit();
+  initCurtainEffect();
 });
 
 /* ============================================
@@ -128,37 +129,25 @@ function initHeroAnimations() {
     y: 40,
     duration: 0.8,
     ease: 'power3.out',
-  }, '-=0.3')
-  .from('.hero__subtitle', {
-    opacity: 0,
-    y: 30,
-    duration: 0.6,
-    ease: 'power3.out',
-  }, '-=0.4')
+  })
   .from('.hero__desc', {
     opacity: 0,
     y: 20,
     duration: 0.5,
     ease: 'power3.out',
   }, '-=0.3')
-  .from('.hero__bullets li', {
-    opacity: 0,
-    x: -20,
-    duration: 0.4,
-    stagger: 0.1,
-    ease: 'power3.out',
-  }, '-=0.2')
-  .from('.hero__stats', {
-    opacity: 0,
-    y: 20,
-    duration: 0.5,
-    ease: 'power3.out',
-  }, '-=0.2')
   .from('.hero__cta', {
     opacity: 0,
     scale: 0.9,
     duration: 0.5,
     ease: 'back.out(1.7)',
+  }, '-=0.2')
+  .from('.hero__badge-item', {
+    opacity: 0,
+    y: 20,
+    duration: 0.4,
+    stagger: 0.1,
+    ease: 'power3.out',
   }, '-=0.2')
   .from('.hero__scroll-indicator', {
     opacity: 0,
@@ -198,19 +187,6 @@ function initRevealAnimations() {
     y: 0,
     duration: 0.6,
     stagger: 0.15,
-    ease: 'power3.out',
-  });
-
-  // Solution cards
-  gsap.to('.solution__card', {
-    scrollTrigger: {
-      trigger: '.solution__grid',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.7,
-    stagger: 0.2,
     ease: 'power3.out',
   });
 
@@ -277,32 +253,6 @@ function initRevealAnimations() {
     stagger: 0.08,
     ease: 'power3.out',
   });
-
-  // Flavor cards
-  gsap.to('.flavor__card', {
-    scrollTrigger: {
-      trigger: '.flavors__grid',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.7,
-    stagger: 0.2,
-    ease: 'power3.out',
-  });
-
-  // HMB blocks
-  gsap.to('.hmb__block', {
-    scrollTrigger: {
-      trigger: '.hmb__grid',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    stagger: 0.2,
-    ease: 'power3.out',
-  });
 }
 
 /* ============================================
@@ -365,16 +315,15 @@ function initFAQ() {
    PARALLAX EFFECTS
    ============================================ */
 function initParallax() {
-  // Hero glow follows scroll
-  gsap.to('.hero__bg-glow', {
+  // Hero content fade out on scroll
+  gsap.to('.hero__content', {
     scrollTrigger: {
       trigger: '.hero',
       start: 'top top',
-      end: 'bottom top',
+      end: '60% top',
       scrub: 1,
     },
-    y: 200,
-    scale: 1.5,
+    y: -60,
     opacity: 0,
   });
 
@@ -396,13 +345,22 @@ function initParallax() {
    FLAVOR CARDS HOVER
    ============================================ */
 function initFlavorHover() {
-  const flipBtns = document.querySelectorAll('.flavor__flip-btn');
+  const tabs = document.querySelectorAll('.flavor-tab');
+  if (!tabs.length) return;
 
-  flipBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.flavor__card');
-      const isBack = card.classList.toggle('showing-back');
-      btn.textContent = isBack ? 'Ver frente' : 'Ver dorso';
+  const bgVainilla = document.querySelector('.flavor-hero__bg--vainilla');
+  const bgChocolate = document.querySelector('.flavor-hero__bg--chocolate');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.flavor;
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      if (bgVainilla && bgChocolate) {
+        bgVainilla.classList.toggle('active', target === 'vainilla');
+        bgChocolate.classList.toggle('active', target === 'chocolate');
+      }
     });
   });
 }
@@ -474,12 +432,20 @@ function initNutriTabs() {
       tab.classList.add('active');
       document.getElementById('panel-' + target).classList.add('active');
 
+      // Switch background image
+      const bgVainilla = document.querySelector('.nutri-section__bg--vainilla');
+      const bgChocolate = document.querySelector('.nutri-section__bg--chocolate');
+      if (bgVainilla && bgChocolate) {
+        bgVainilla.classList.toggle('active', target === 'vainilla');
+        bgChocolate.classList.toggle('active', target === 'chocolate');
+      }
+
       // Close any open table when switching tabs
       document.querySelectorAll('.nutri__collapsible').forEach(c => c.classList.remove('open'));
     });
   });
 
-  // Table toggle buttons
+  // Table toggle
   document.querySelectorAll('.nutri__toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const collapsible = btn.closest('.nutri__collapsible');
@@ -644,4 +610,33 @@ function initTextSplit() {
       ease: 'power3.out',
     });
   });
+}
+
+/* ============================================
+   CURTAIN EFFECT
+   ============================================ */
+function initCurtainEffect() {
+  if (window.innerWidth < 768) return;
+
+  const hero = document.getElementById('hero');
+  if (hero) {
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'bottom bottom',
+      end: () => '+=' + window.innerHeight * 0.3,
+      pin: true,
+      pinSpacing: false,
+    });
+  }
+
+  const lifestyle = document.getElementById('lifestyleImg');
+  if (lifestyle) {
+    ScrollTrigger.create({
+      trigger: lifestyle,
+      start: 'bottom bottom',
+      end: () => '+=' + window.innerHeight * 0.3,
+      pin: true,
+      pinSpacing: false,
+    });
+  }
 }
