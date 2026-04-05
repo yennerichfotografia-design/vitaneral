@@ -80,7 +80,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: var(--dark);
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,10 +95,9 @@ body {
   text-align: center;
 }
 .preloader__logo {
-  width: 160px;
+  width: 280px;
   height: auto;
   margin-bottom: 24px;
-  filter: brightness(0) invert(1);
   animation: preloaderPulse 1.2s ease-in-out infinite;
 }
 @keyframes preloaderPulse {
@@ -286,9 +285,11 @@ button:focus-visible,
   border-bottom: none;
 }
 .navbar.scrolled {
-  background: var(--primary);
-  box-shadow: 0 2px 8px rgba(243,150,0,0.2);
-  padding: 12px 0;
+  background: rgba(243,150,0,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(243,150,0,0.25);
+  padding: 10px 0;
   border-bottom: none;
 }
 .navbar__inner {
@@ -302,7 +303,7 @@ button:focus-visible,
   transition: var(--transition);
 }
 .navbar__logo-img {
-  height: 58px;
+  height: 56px;
   width: auto;
   transition: var(--transition);
 }
@@ -317,7 +318,7 @@ button:focus-visible,
   gap: 40px;
 }
 .navbar__links a {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 500;
   color: rgba(255,255,255,0.9);
   letter-spacing: 0.02em;
@@ -328,11 +329,15 @@ button:focus-visible,
   content: '';
   position: absolute;
   bottom: -4px;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: var(--primary);
-  transition: var(--transition);
+  background: var(--white);
+  transition: width 0.3s ease;
+}
+.navbar__links a:hover {
+  color: var(--white);
 }
 .navbar__links a:hover::after { width: 100%; }
 .navbar__links a.active::after { width: 100%; }
@@ -629,6 +634,9 @@ button:focus-visible,
   font-weight: 600;
   margin-bottom: 10px;
   color: var(--white);
+  min-height: 3.2em;
+  display: flex;
+  align-items: flex-end;
 }
 .problem__card p {
   font-size: 1.05rem;
@@ -1913,7 +1921,7 @@ button:focus-visible,
 /* Scroll-section wrapper */
 #scroll-section {
   position: relative;
-  height: 400vh;
+  height: 250vh;
   background: var(--white);
 }
 #sticky-stage {
@@ -1956,7 +1964,7 @@ button:focus-visible,
 .solution-scroll__video {
   position: relative;
   width: 100%;
-  max-width: 420px;
+  max-width: 580px;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--white);
