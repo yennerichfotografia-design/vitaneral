@@ -227,6 +227,19 @@ function initRevealAnimations() {
     ease: 'power3.out',
   });
 
+  // HMB cards stagger
+  gsap.to('.hmb-hero__card', {
+    scrollTrigger: {
+      trigger: '.hmb-hero__cards',
+      start: 'top 80%',
+    },
+    opacity: 1,
+    y: 0,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: 'power3.out',
+  });
+
   // Compare table
   gsap.to('.compare__table-wrapper', {
     scrollTrigger: {
