@@ -1747,8 +1747,18 @@ button:focus-visible,
    RESPONSIVE
    ============================================ */
 @media (max-width: 1024px) {
+  .problem__cards { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .problem__card-body { padding: 16px 20px; }
+  .problem__card h3 { font-size: 1.05rem; min-height: 2.6em; }
+  .problem__card p { font-size: 0.85rem; }
   .benefits__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__inner { grid-template-columns: 1fr 1fr; }
+  .container { padding: 0 40px; }
+  .compare-visual { gap: 16px; }
+  .compare-visual__card { padding: 28px 20px; }
+  .compare-visual__card--main { padding: 36px 28px; }
+  .solution__features { gap: 16px; }
+  .solution__feature-card { padding: 28px 16px; }
 }
 
 @media (max-width: 767px) {
