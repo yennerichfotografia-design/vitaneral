@@ -2013,6 +2013,12 @@ button:focus-visible,
   height: 200vh;
   background: var(--white);
 }
+@media (max-height: 800px) {
+  #scroll-section { height: 280vh; }
+}
+@media (max-height: 650px) {
+  #scroll-section { height: 350vh; }
+}
 #sticky-stage {
   position: sticky;
   top: 0;
