@@ -2010,9 +2010,8 @@ button:focus-visible,
 /* Scroll-section wrapper */
 #scroll-section {
   position: relative;
-  height: 300vh;
+  height: 200vh;
   background: var(--white);
-  overflow: hidden;
 }
 #sticky-stage {
   position: sticky;
@@ -2195,7 +2194,7 @@ button:focus-visible,
 
 /* Mobile: stack vertically */
 @media (max-width: 768px) {
-  #scroll-section { height: 300vh; }
+  #scroll-section { height: 200vh; }
   #sticky-stage {
     padding: 70px 0 20px;
     align-items: flex-start;
