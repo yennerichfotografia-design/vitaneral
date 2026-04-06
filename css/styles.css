@@ -2010,8 +2010,9 @@ button:focus-visible,
 /* Scroll-section wrapper */
 #scroll-section {
   position: relative;
-  height: 250vh;
+  height: 300vh;
   background: var(--white);
+  overflow: hidden;
 }
 #sticky-stage {
   position: sticky;
