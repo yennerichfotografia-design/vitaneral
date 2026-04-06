@@ -1406,6 +1406,14 @@ button:focus-visible,
   color: var(--white);
   transform: translateY(-3px);
 }
+.footer__disclaimer {
+  padding: 16px 0;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
 .footer__bottom {
   padding: 24px 0;
   text-align: center;
