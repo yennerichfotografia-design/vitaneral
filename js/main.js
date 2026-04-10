@@ -588,14 +588,4 @@ function initCurtainEffect() {
     });
   }
 
-  const lifestyle = document.getElementById('lifestyleImg');
-  if (lifestyle) {
-    ScrollTrigger.create({
-      trigger: lifestyle,
-      start: 'bottom bottom',
-      end: () => '+=' + window.innerHeight * 0.3,
-      pin: true,
-      pinSpacing: false,
-    });
-  }
 }

@@ -216,6 +216,8 @@ button:focus-visible,
 }
 .section--light { background: var(--warm-white); }
 .section--compact { padding: 48px 0; }
+.section--no-bottom { padding-bottom: 20px; }
+.section--no-top { padding-top: 20px; }
 .section--gradient {
   background: var(--gray-100);
 }
@@ -475,7 +477,7 @@ button:focus-visible,
   letter-spacing: -0.02em;
   color: var(--white);
   margin-bottom: 20px;
-  max-width: 700px;
+  max-width: 900px;
 }
 .hero__subtitle {
   font-size: clamp(1.15rem, 2vw, 1.5rem);
@@ -488,7 +490,7 @@ button:focus-visible,
   font-size: 1.15rem;
   color: rgba(255,255,255,0.75);
   margin-bottom: 24px;
-  max-width: 580px;
+  max-width: 750px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.7;
@@ -534,26 +536,25 @@ button:focus-visible,
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-top: 40px;
+  margin-top: 160px;
   flex-wrap: wrap;
 }
 .hero__badge-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 20px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 100px;
-  color: rgba(255,255,255,0.9);
-  font-size: 0.8rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
   line-height: 1.3;
 }
-.hero__badge-item svg {
+.hero__badge-icon {
+  width: 28px;
+  height: 28px;
   flex-shrink: 0;
-  color: var(--primary-light);
+  object-fit: contain;
 }
 .hero__badge-item strong {
   color: var(--white);
@@ -630,8 +631,10 @@ button:focus-visible,
   border-top: 1px solid rgba(255,255,255,0.25);
 }
 .problem__card h3 {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.15;
   margin-bottom: 10px;
   color: var(--white);
   min-height: 3.2em;
@@ -660,26 +663,30 @@ button:focus-visible,
    ============================================ */
 .hmb-hero {
   overflow: hidden;
-  background: var(--dark);
+  background: var(--gray-100);
 }
 .hmb-hero__layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 700px;
+  align-items: stretch;
+}
+.hmb-hero__image {
+  display: flex;
+  align-items: center;
 }
 .hmb-hero__image {
   overflow: hidden;
 }
 .hmb-hero__image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 .hmb-hero__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 64px 56px;
+  padding: 40px 48px;
 }
 .hmb-hero__title {
   font-family: var(--font-heading);
@@ -687,42 +694,42 @@ button:focus-visible,
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: var(--gray-900);
   margin-bottom: 16px;
 }
 .hmb-hero__desc {
-  font-size: 1.05rem;
-  color: rgba(255,255,255,0.7);
-  line-height: 1.7;
-  margin-bottom: 32px;
+  font-size: 1rem;
+  color: var(--gray-500);
+  line-height: 1.6;
+  margin-bottom: 20px;
 }
 .hmb-hero__cards {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
 }
 .hmb-hero__card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 20px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
+  gap: 12px;
+  padding: 14px;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
   border-radius: var(--radius);
   transition: var(--transition);
 }
 .hmb-hero__card:hover {
-  background: rgba(255,255,255,0.15);
+  box-shadow: var(--shadow);
   transform: translateX(4px);
 }
 .hmb-hero__card-number {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--primary);
   line-height: 1;
-  min-width: 64px;
+  min-width: 50px;
 }
 .hmb-hero__card-icon {
   width: 44px;
@@ -741,13 +748,13 @@ button:focus-visible,
   gap: 2px;
 }
 .hmb-hero__card-text strong {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--white);
+  color: var(--gray-900);
 }
 .hmb-hero__card-text span {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  color: var(--gray-500);
 }
 
 @media (max-width: 767px) {
@@ -756,7 +763,7 @@ button:focus-visible,
     min-height: auto;
   }
   .hmb-hero__image {
-    aspect-ratio: 16 / 9;
+    width: 100%;
   }
   .hmb-hero__content {
     padding: 40px 20px;
@@ -799,10 +806,35 @@ button:focus-visible,
   border-color: rgba(243,150,0,0.3);
 }
 .benefit__icon {
-  color: var(--primary);
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
+}
+.benefit__icon-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+/* Formula badge hanging from card */
+.benefit__card--formula {
+  position: relative;
+  overflow: visible;
+}
+.benefit__card--formula .benefit__icon {
+  visibility: hidden;
+}
+.benefit__card--formula h3 {
+  visibility: hidden;
+}
+.benefit__formula-badge {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: auto;
+  z-index: 3;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
 }
 .benefit__card h3 {
   font-size: 1.1rem;
@@ -941,8 +973,8 @@ button:focus-visible,
   opacity: 0.7;
 }
 .compare-visual__no span {
-  background: #FFE5E5;
-  color: #CC4444;
+  background: var(--gray-100);
+  color: var(--gray-500);
 }
 .compare-visual__muted {
   opacity: 0.8;
@@ -1168,6 +1200,8 @@ button:focus-visible,
   border: 1px solid var(--gray-100);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .testimonial__card::before { display: none; }
 .testimonial__card:hover {
@@ -1176,6 +1210,7 @@ button:focus-visible,
   border-color: var(--gray-300);
 }
 .testimonial__quote-mark {
+  display: none;
   font-size: 3rem;
   line-height: 1;
   font-weight: 800;
@@ -1188,16 +1223,24 @@ button:focus-visible,
 }
 .testimonial__stars {
   color: var(--primary);
-  font-size: 1.2rem;
-  margin-bottom: 16px;
+  font-size: 1.8rem;
+  margin-bottom: 12px;
   letter-spacing: 2px;
 }
+.testimonial__title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
 .testimonial__card blockquote {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-style: italic;
   color: var(--gray-700);
   line-height: 1.6;
   margin-bottom: 24px;
+  flex-grow: 1;
 }
 .testimonial__author {
   display: flex;
@@ -1205,6 +1248,7 @@ button:focus-visible,
   gap: 12px;
 }
 .testimonial__avatar {
+  display: none;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -1358,8 +1402,9 @@ button:focus-visible,
 .footer__brand { max-width: 320px; }
 .footer__logo {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
+  margin-bottom: 12px;
   margin-bottom: 16px;
 }
 .footer__logo-natufarma {
@@ -1666,6 +1711,37 @@ button:focus-visible,
   height: 550px;
   overflow: hidden;
   position: relative;
+}
+
+/* Galería VAMOS X TODO */
+.vamos-gallery {
+  padding: 0;
+}
+.vamos-gallery {
+  margin-bottom: 80px;
+}
+.vamos-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.vamos-gallery__item {
+  overflow: hidden;
+}
+.vamos-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.vamos-gallery__item:hover img {
+  transform: scale(1.03);
+}
+@media (max-width: 767px) {
+  .vamos-gallery__grid {
+    grid-template-columns: 1fr;
+  }
 }
 .parallax-section__img {
   width: 100%;
@@ -2101,6 +2177,26 @@ button:focus-visible,
   height: 100%;
 }
 
+/* Product images */
+.solution__products {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+.solution__product img {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  .solution__products {
+    gap: 16px;
+    max-width: 100%;
+  }
+}
+
 /* Feature cards below video */
 .solution__features {
   display: grid;
@@ -2127,7 +2223,7 @@ button:focus-visible,
 }
 .solution__feature-card h4 {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--gray-900);
   margin-bottom: 8px;
