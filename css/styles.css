@@ -161,7 +161,7 @@ button:focus-visible,
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 64px;
+  padding: 0 clamp(20px, 4vw, 64px);
 }
 
 /* BUTTONS */
@@ -211,7 +211,7 @@ button:focus-visible,
 
 /* SECTIONS */
 .section {
-  padding: 120px 0;
+  padding: clamp(48px, 8vw, 120px) 0;
   position: relative;
 }
 .section--light { background: var(--warm-white); }
@@ -237,7 +237,7 @@ button:focus-visible,
 .section__header {
   text-align: center;
   max-width: 900px;
-  margin: 0 auto 80px;
+  margin: 0 auto clamp(32px, 5vw, 80px);
 }
 .section__tag {
   display: inline-block;
@@ -588,8 +588,8 @@ button:focus-visible,
    ============================================ */
 .problem__cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(16px, 2vw, 28px);
 }
 .problem__card {
   border-radius: var(--radius-lg);
@@ -670,6 +670,11 @@ button:focus-visible,
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
 }
+@media (max-width: 900px) {
+  .hmb-hero__layout {
+    grid-template-columns: 1fr;
+  }
+}
 .hmb-hero__image {
   display: flex;
   align-items: center;
@@ -686,7 +691,7 @@ button:focus-visible,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px 48px;
+  padding: clamp(28px, 4vw, 48px);
 }
 .hmb-hero__title {
   font-family: var(--font-heading);
@@ -785,8 +790,8 @@ button:focus-visible,
    ============================================ */
 .benefits__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
 }
 .benefit__card {
   text-align: center;
@@ -854,8 +859,16 @@ button:focus-visible,
 .compare-visual {
   display: grid;
   grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 20px;
+  gap: clamp(12px, 2vw, 20px);
   align-items: stretch;
+}
+@media (max-width: 900px) {
+  .compare-visual {
+    grid-template-columns: 1fr;
+  }
+  .compare-visual__card--main {
+    order: -1;
+  }
 }
 .compare-visual__card {
   border-radius: var(--radius-lg);
@@ -1188,8 +1201,8 @@ button:focus-visible,
    ============================================ */
 .testimonials__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
 }
 .testimonial__card {
   background: var(--white);
@@ -1394,8 +1407,8 @@ button:focus-visible,
 }
 .footer__inner {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(20px, 3vw, 40px);
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
@@ -1720,11 +1733,6 @@ button:focus-visible,
 .vamos-gallery {
   margin-bottom: 80px;
 }
-.vamos-gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
 .vamos-gallery__item {
   overflow: hidden;
 }
@@ -1738,10 +1746,10 @@ button:focus-visible,
 .vamos-gallery__item:hover img {
   transform: scale(1.03);
 }
-@media (max-width: 767px) {
-  .vamos-gallery__grid {
-    grid-template-columns: 1fr;
-  }
+.vamos-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
 }
 .parallax-section__img {
   width: 100%;
@@ -1822,24 +1830,9 @@ button:focus-visible,
 /* ============================================
    RESPONSIVE
    ============================================ */
-@media (max-width: 1024px) {
-  .problem__cards { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .problem__card-body { padding: 16px 20px; }
-  .problem__card h3 { font-size: 1.05rem; min-height: 2.6em; }
-  .problem__card p { font-size: 0.85rem; }
-  .benefits__grid { grid-template-columns: repeat(2, 1fr); }
-  .footer__inner { grid-template-columns: 1fr 1fr; }
-  .container { padding: 0 40px; }
-  .compare-visual { gap: 16px; }
-  .compare-visual__card { padding: 28px 20px; }
-  .compare-visual__card--main { padding: 36px 28px; }
-  .solution__features { gap: 16px; }
-  .solution__feature-card { padding: 28px 16px; }
-}
+/* 1024px breakpoint removed — grids now use auto-fit */
 
 @media (max-width: 767px) {
-  .section { padding: 64px 0; }
-  .section__header { margin-bottom: 40px; }
   .section__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
   .section__desc { font-size: 0.95rem; }
 
@@ -1933,7 +1926,6 @@ button:focus-visible,
 
   /* SECTIONS */
   /* Container */
-  .container { padding: 0 20px; }
 
   .problem__cards { grid-template-columns: 1fr; gap: 16px; }
   .problem__card { padding: 24px 20px; }
@@ -2180,8 +2172,8 @@ button:focus-visible,
 /* Product images */
 .solution__products {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(16px, 3vw, 40px);
   max-width: 1100px;
   margin: 0 auto;
   align-items: center;
@@ -2200,8 +2192,8 @@ button:focus-visible,
 /* Feature cards below video */
 .solution__features {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(16px, 2vw, 24px);
   width: 100%;
 }
 .solution__feature-card {
