@@ -71,7 +71,30 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarouselHints();
   initResponsiveVideos();
   initSolutionEntrance();
+  initVideoPauseOffscreen();
 });
+
+/* ============================================
+   OPTIMIZACIÓN LOW-END: pausar videos fuera del viewport
+   Ahorra CPU/GPU significativo en mobiles de gama baja
+   ============================================ */
+function initVideoPauseOffscreen() {
+  const videos = document.querySelectorAll('video[autoplay]');
+  if (!videos.length || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        if (video.paused) video.play().catch(() => { /* autoplay block */ });
+      } else {
+        if (!video.paused) video.pause();
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '50px' });
+
+  videos.forEach((v) => observer.observe(v));
+}
 
 /* ============================================
    SOLUCIÓN: entrance stagger para estuches y feature cards
