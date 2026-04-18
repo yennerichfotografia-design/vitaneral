@@ -2308,23 +2308,23 @@ body.menu-open { overflow: hidden; }
    ============================================ */
 .cookie-banner {
   position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
   z-index: 997;
   background: var(--gray-900);
   color: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  padding: 18px 20px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px);
-  transition: opacity 0.4s var(--ease-out),
-              transform 0.4s var(--ease-out),
-              visibility 0.4s;
-  max-width: 560px;
+  transform: translateY(16px);
+  transition: opacity 0.35s var(--ease-out),
+              transform 0.35s var(--ease-out),
+              visibility 0.35s;
+  max-width: 480px;
   margin: 0 auto;
 }
 .cookie-banner.visible {
@@ -2335,25 +2335,26 @@ body.menu-open { overflow: hidden; }
 .cookie-banner__inner {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 .cookie-banner__text {
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.82rem;
+  line-height: 1.4;
   margin: 0;
-  flex: 1 1 220px;
+  flex: 1 1 180px;
 }
 .cookie-banner__actions {
   display: flex;
   gap: 10px;
 }
 .cookie-banner__btn {
-  padding: 10px 20px;
-  min-height: 44px;
+  padding: 6px 14px;
+  min-height: 36px;
   border-radius: 100px;
   font-weight: 600;
+  font-size: 0.82rem;
   font-size: 0.92rem;
   border: 1px solid transparent;
   cursor: pointer;
@@ -2374,9 +2375,8 @@ body.menu-open { overflow: hidden; }
   .cookie-banner__btn--accept:hover { background: var(--primary-dark); }
 }
 @media (max-width: 480px) {
-  .cookie-banner__inner { flex-direction: column; align-items: stretch; }
-  .cookie-banner__actions { justify-content: center; }
-  .cookie-banner__btn { flex: 1; }
+  .cookie-banner__actions { gap: 6px; }
+  .cookie-banner__btn { padding: 6px 10px; }
 }
 
 /* Floating CTA — hidden on desktop */
