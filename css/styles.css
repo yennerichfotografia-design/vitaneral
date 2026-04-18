@@ -162,8 +162,9 @@ button:focus-visible,
 .btn:focus-visible,
 .faq__question:focus-visible,
 .nutri__tab:focus-visible,
-.flavor__flip-btn:focus-visible {
-  outline: 2px solid var(--primary);
+.flavor-tab:focus-visible,
+.footer__social-link:focus-visible {
+  outline: 3px solid var(--primary);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -187,6 +188,7 @@ button:focus-visible,
   font-size: 1rem;
   background: var(--primary);
   color: var(--white);
+  box-shadow: 0 6px 18px rgba(243, 150, 0, 0.25); /* sombra base para destacar el CTA */
   transition: transform 0.18s var(--ease-out),
               background 0.25s var(--ease-out),
               box-shadow 0.25s var(--ease-out);
@@ -1008,9 +1010,11 @@ body.menu-open { overflow: hidden; }
   gap: clamp(12px, 2vw, 20px);
   align-items: stretch;
 }
-.compare-visual__swipe-hint { display: none; }
+.compare-visual__swipe-hint,
+.testimonials__swipe-hint { display: none; }
 @media (max-width: 900px) {
-  .compare-visual__swipe-hint {
+  .compare-visual__swipe-hint,
+  .testimonials__swipe-hint {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1024,9 +1028,12 @@ body.menu-open { overflow: hidden; }
     font-weight: 600;
     max-width: fit-content;
   }
-  .compare-visual__swipe-hint svg { flex-shrink: 0; }
-  .compare-visual__swipe-hint svg:first-child { animation: hint-arrow-l 1.8s ease-in-out infinite; }
-  .compare-visual__swipe-hint svg:last-child { animation: hint-arrow-r 1.8s ease-in-out infinite; }
+  .compare-visual__swipe-hint svg,
+  .testimonials__swipe-hint svg { flex-shrink: 0; }
+  .compare-visual__swipe-hint svg:first-child,
+  .testimonials__swipe-hint svg:first-child { animation: hint-arrow-l 1.8s ease-in-out infinite; }
+  .compare-visual__swipe-hint svg:last-child,
+  .testimonials__swipe-hint svg:last-child { animation: hint-arrow-r 1.8s ease-in-out infinite; }
   @keyframes hint-arrow-l {
     0%, 100% { transform: translateX(0); opacity: 0.6; }
     50% { transform: translateX(-3px); opacity: 1; }
@@ -1036,7 +1043,8 @@ body.menu-open { overflow: hidden; }
     50% { transform: translateX(3px); opacity: 1; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .compare-visual__swipe-hint svg { animation: none; }
+    .compare-visual__swipe-hint svg,
+    .testimonials__swipe-hint svg { animation: none; }
   }
 }
 /* Swipe hint: micro-bounce del primer card para sugerir swipe */
@@ -1857,8 +1865,8 @@ body.menu-open { overflow: hidden; }
 .nutri__highlight-label {
   display: block;
   margin-top: 8px;
-  font-size: 0.8rem;
-  color: var(--gray-500);
+  font-size: 0.9rem;
+  color: var(--gray-700);
   margin-top: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
