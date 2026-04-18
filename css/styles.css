@@ -192,7 +192,6 @@ button:focus-visible,
   .navbar,
   .floating-cta,
   .back-to-top,
-  .cookie-banner,
   .hero__video-bg,
   .science-section__bg,
   .flavor-hero__bg,
@@ -2301,82 +2300,6 @@ body.menu-open { overflow: hidden; }
 .back-to-top:active {
   transform: scale(0.93);
   transition-duration: 0.1s;
-}
-
-/* ============================================
-   COOKIE CONSENT BANNER
-   ============================================ */
-.cookie-banner {
-  position: fixed;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  bottom: calc(12px + env(safe-area-inset-bottom));
-  z-index: 997;
-  background: var(--gray-900);
-  color: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 10px 14px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(16px);
-  transition: opacity 0.35s var(--ease-out),
-              transform 0.35s var(--ease-out),
-              visibility 0.35s;
-  max-width: 480px;
-  margin: 0 auto;
-}
-.cookie-banner.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-.cookie-banner__inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.cookie-banner__text {
-  font-size: 0.82rem;
-  line-height: 1.4;
-  margin: 0;
-  flex: 1 1 180px;
-}
-.cookie-banner__actions {
-  display: flex;
-  gap: 10px;
-}
-.cookie-banner__btn {
-  padding: 6px 14px;
-  min-height: 36px;
-  border-radius: 100px;
-  font-weight: 600;
-  font-size: 0.82rem;
-  font-size: 0.92rem;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: transform 0.15s var(--ease-out), background 0.2s var(--ease-out);
-}
-.cookie-banner__btn--reject {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.75);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-.cookie-banner__btn--accept {
-  background: var(--primary);
-  color: var(--white);
-}
-.cookie-banner__btn:active { transform: scale(0.96); }
-@media (hover: hover) and (pointer: fine) {
-  .cookie-banner__btn--reject:hover { background: rgba(255, 255, 255, 0.1); color: var(--white); }
-  .cookie-banner__btn--accept:hover { background: var(--primary-dark); }
-}
-@media (max-width: 480px) {
-  .cookie-banner__actions { gap: 6px; }
-  .cookie-banner__btn { padding: 6px 10px; }
 }
 
 /* Floating CTA — hidden on desktop */

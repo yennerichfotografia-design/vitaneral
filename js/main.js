@@ -72,39 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initResponsiveVideos();
   initSolutionEntrance();
   initVideoPauseOffscreen();
-  initCookieBanner();
 });
-
-/* ============================================
-   COOKIE CONSENT BANNER (vanilla, sin libs)
-   ============================================ */
-function initCookieBanner() {
-  const banner = document.getElementById('cookieBanner');
-  const accept = document.getElementById('cookieAccept');
-  const reject = document.getElementById('cookieReject');
-  if (!banner || !accept || !reject) return;
-
-  const choice = localStorage.getItem('cookieConsent');
-  if (!choice) {
-    setTimeout(() => {
-      banner.classList.add('visible');
-      banner.setAttribute('aria-hidden', 'false');
-    }, 800);
-  }
-
-  const close = (value) => {
-    localStorage.setItem('cookieConsent', value);
-    banner.classList.remove('visible');
-    banner.setAttribute('aria-hidden', 'true');
-    if (value === 'accepted') {
-      // Dispara un evento para que scripts de analytics puedan activarse si corresponde
-      window.dispatchEvent(new CustomEvent('cookies:accepted'));
-    }
-  };
-
-  accept.addEventListener('click', () => close('accepted'));
-  reject.addEventListener('click', () => close('rejected'));
-}
 
 /* ============================================
    OPTIMIZACIÓN LOW-END: pausar videos fuera del viewport
