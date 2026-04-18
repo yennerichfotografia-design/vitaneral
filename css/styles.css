@@ -302,11 +302,11 @@ button:focus-visible,
   padding: 8px 20px;
   border-radius: 100px;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  background: rgba(243,150,0,0.08);
-  color: var(--primary);
+  background: rgba(243, 150, 0, 0.18);
+  color: #8F4F00; /* naranja más oscuro — contraste AAA sobre bg naranja claro */
   margin-bottom: 24px;
 }
 .section__tag--light {
@@ -899,7 +899,7 @@ body.menu-open { overflow: hidden; }
   font-family: var(--font-heading);
   font-size: 1.3rem;
   font-weight: 800;
-  color: var(--primary);
+  color: #8F4F00; /* naranja más oscuro — contraste AAA sobre fondo blanco */
   line-height: 1;
   min-width: 50px;
 }
