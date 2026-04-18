@@ -274,6 +274,13 @@ button:focus-visible,
   line-height: 1.15;
   margin-bottom: 20px;
   color: var(--gray-900);
+  text-wrap: balance;
+}
+.hero__title,
+.hmb-hero__title,
+.flavor-hero__title,
+.cta-final__inner h2 {
+  text-wrap: balance;
 }
 .section__title--light { color: var(--white); }
 .section__desc {
