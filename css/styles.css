@@ -2168,11 +2168,12 @@ button:focus-visible,
   .hero {
     min-height: 100vh;
     min-height: 100svh;
-    padding-top: 70px;
-    padding-bottom: 40px;
+    /* Paddings balanceados: contenido queda en el centro visual del viewport */
+    padding-top: clamp(100px, 14vh, 140px);
+    padding-bottom: clamp(60px, 9vh, 90px);
   }
   .hero__inner {
-    padding-top: 20px;
+    padding-top: 0;
     padding-left: clamp(8px, 2vw, 16px);
     padding-right: clamp(8px, 2vw, 16px);
   }
