@@ -2168,14 +2168,12 @@ button:focus-visible,
   .hero {
     min-height: 100vh;
     min-height: 100svh;
-    /* Paddings balanceados: contenido queda en el centro visual del viewport */
-    padding-top: clamp(100px, 14vh, 140px);
-    padding-bottom: clamp(60px, 9vh, 90px);
+    /* Paddings para bajar el contenido al centro visual (más abajo = se ve más foto arriba) */
+    padding-top: clamp(140px, 20vh, 200px);
+    padding-bottom: clamp(70px, 10vh, 100px);
   }
   .hero__inner {
-    padding-top: 0;
-    padding-left: clamp(8px, 2vw, 16px);
-    padding-right: clamp(8px, 2vw, 16px);
+    padding: 0 clamp(8px, 2vw, 16px);
   }
   .hero__title {
     /* Escalado fluido: 1.85rem en 320px → 2.4rem en 768px */
