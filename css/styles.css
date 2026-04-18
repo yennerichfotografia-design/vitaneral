@@ -301,12 +301,10 @@ button:focus-visible,
   right: 0;
   z-index: 1000;
   padding: 16px 0;
-  padding-top: calc(16px + env(safe-area-inset-top));
+  padding-top: max(16px, env(safe-area-inset-top));
   transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
   background: var(--primary);
   border-bottom: none;
-  transform: translateZ(0);
-  will-change: background, padding;
 }
 .navbar.scrolled {
   background: var(--primary);
@@ -2264,13 +2262,13 @@ button:focus-visible,
   .footer__disclaimer { padding: 12px 16px; font-size: 0.78rem; line-height: 1.45; }
   .footer__bottom { padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); font-size: 0.82rem; }
 
-  /* Reserva espacio para floating CTA mobile (56px alto + 16px top + 16px bottom + safe-area) */
-  body { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+  /* Reserva espacio para floating CTA mobile (56px alto + 30px aire + safe-area) */
+  body { padding-bottom: max(90px, calc(80px + env(safe-area-inset-bottom))); }
 
   /* Floating CTA mobile */
   .floating-cta {
     position: fixed;
-    bottom: calc(16px + env(safe-area-inset-bottom));
+    bottom: max(14px, env(safe-area-inset-bottom));
     left: 16px;
     right: 16px;
     z-index: 999;
@@ -2302,7 +2300,7 @@ button:focus-visible,
 
   /* Back to top: above floating CTA on mobile */
   .back-to-top {
-    bottom: calc(92px + env(safe-area-inset-bottom));
+    bottom: max(86px, calc(72px + env(safe-area-inset-bottom)));
     right: 16px;
     width: 44px;
     height: 44px;
