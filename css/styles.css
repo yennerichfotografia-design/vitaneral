@@ -173,7 +173,7 @@ button:focus-visible,
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 64px);
+  padding: 0 clamp(24px, 4.5vw, 64px);
 }
 
 /* BUTTONS */
@@ -2173,6 +2173,8 @@ button:focus-visible,
   }
   .hero__inner {
     padding-top: 20px;
+    padding-left: clamp(8px, 2vw, 16px);
+    padding-right: clamp(8px, 2vw, 16px);
   }
   .hero__title {
     /* Escalado fluido: 1.85rem en 320px → 2.4rem en 768px */
