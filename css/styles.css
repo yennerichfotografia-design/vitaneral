@@ -2646,53 +2646,57 @@ body.menu-open { overflow: hidden; }
     font-size: 1rem;
   }
 
-  /* Footer mobile ultra compacto */
-  .footer { padding-top: 24px; }
+  /* Footer mobile — mínimo absoluto */
+  .footer { padding-top: 20px; }
   .footer__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     grid-template-columns: none;
-    gap: 10px;
+    gap: 12px;
     text-align: center;
-    padding-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: none;
   }
   .footer__brand {
     grid-column: auto;
     max-width: 360px;
     margin: 0;
   }
-  .footer__logo { justify-content: center; margin-bottom: 6px; }
+  .footer__logo {
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .footer__logo-natufarma { width: 64px; height: auto; }
   .footer__brand p { display: none; }
-  .footer__location { display: none; } /* location pill fuera en mobile para compactar */
+  .footer__location { display: none; }
 
+  /* Columna Producto entera oculta (los links ya están en el hamburger) */
+  .footer__links:first-of-type { display: none; }
+  /* Columna Contacto: ocultamos h4 y ul, dejamos solo los social icons */
   .footer__links { width: 100%; }
   .footer__links h4 { display: none; }
-  .footer__links:first-of-type { display: none; }
-  .footer__links ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2px 18px;
-    margin: 0;
-  }
-  .footer__links a {
-    font-size: 0.92rem;
-    padding: 2px 2px;
-    justify-content: center;
-  }
-  .footer__links ul a svg { display: none; }
-
+  .footer__links ul { display: none; }
   .footer__social {
+    display: flex;
     justify-content: center;
     gap: 10px;
-    margin: 4px 0 0;
+    margin: 0;
   }
   .footer__social-link { width: 40px; height: 40px; }
 
-  .footer__disclaimer { padding: 10px 16px; font-size: 0.75rem; line-height: 1.4; }
-  .footer__bottom { padding: 8px 0 calc(8px + env(safe-area-inset-bottom)); font-size: 0.78rem; }
+  /* Fusionamos disclaimer + copyright visualmente: mínimo espacio */
+  .footer__disclaimer {
+    padding: 8px 16px;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .footer__bottom {
+    padding: 4px 0 calc(8px + env(safe-area-inset-bottom));
+    font-size: 0.72rem;
+    opacity: 0.7;
+  }
 
   /* Floating CTA se oculta automáticamente al llegar al footer (JS) — no hace falta padding extra */
 
