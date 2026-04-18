@@ -2143,10 +2143,10 @@ button:focus-visible,
 /* 1024px breakpoint removed — grids now use auto-fit */
 
 @media (max-width: 767px) {
-  .section__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
-  .section__desc { font-size: 1.05rem; }
+  .section__title { font-size: clamp(1.7rem, 1.3rem + 2vw, 2.4rem); line-height: 1.2; }
+  .section__desc { font-size: clamp(0.95rem, 0.85rem + 0.4vw, 1.1rem); }
 
-  /* HERO MOBILE — tamaños fijos (sin vw) para rendering consistente en todos los dispositivos */
+  /* HERO MOBILE — fluid responsive: escala suave entre 320px y 768px */
   .hero {
     min-height: 100vh;
     min-height: 100svh;
@@ -2157,53 +2157,48 @@ button:focus-visible,
     padding-top: 20px;
   }
   .hero__title {
-    font-size: 2.2rem; /* fijo: ~35px igual en iPhone y Android */
+    /* Escalado fluido: 1.85rem en 320px → 2.4rem en 768px */
+    font-size: clamp(1.85rem, 1.5rem + 1.8vw, 2.4rem);
     line-height: 1.18;
     letter-spacing: -0.015em;
-    margin-bottom: 16px;
+    margin-bottom: clamp(12px, 2.5vw, 18px);
   }
   .hero__badges {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 40px;
+    gap: clamp(8px, 1.5vw, 12px);
+    margin-top: clamp(28px, 6vw, 48px);
     max-width: 100%;
   }
   .hero__badge-item {
-    padding: 12px 14px;
-    font-size: 0.9rem;
-    gap: 10px;
+    padding: clamp(10px, 2vw, 14px) clamp(10px, 2.5vw, 16px);
+    font-size: clamp(0.8rem, 0.65rem + 0.7vw, 0.95rem);
+    gap: clamp(8px, 1.5vw, 12px);
     border-radius: 14px;
     justify-content: center;
     text-align: left;
   }
   .hero__badge-icon {
-    width: 28px;
-    height: 28px;
+    width: clamp(24px, 6vw, 30px);
+    height: clamp(24px, 6vw, 30px);
   }
   .hero__badge-item svg {
     width: 16px;
     height: 16px;
   }
   .hero__desc {
-    font-size: 1.05rem;
+    font-size: clamp(0.98rem, 0.85rem + 0.5vw, 1.15rem);
     line-height: 1.55;
-    margin: 0 auto 20px;
+    margin: 0 auto clamp(16px, 3vw, 22px);
     max-width: 100%;
   }
   .hero__cta {
     width: 100%;
     justify-content: center;
-    padding: 18px 32px;
-    font-size: 1.05rem;
+    padding: clamp(15px, 3.5vw, 20px) clamp(24px, 5vw, 36px);
+    font-size: clamp(0.98rem, 0.9rem + 0.3vw, 1.1rem);
   }
   .hero__scroll-indicator { display: none; }
-
-  /* Pantallas muy chicas (<360px): reducir apenas el título para que mantenga 4 líneas */
-  @media (max-width: 359px) {
-    .hero__title { font-size: 1.95rem; }
-    .hero__badge-item { font-size: 0.82rem; padding: 10px 12px; }
-  }
 
   /* NAVBAR MOBILE */
   .navbar {
