@@ -64,11 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingCta();
   initNutriTabs();
   initScrollProgress();
-  initCustomCursor();
   initCardTilt();
-  initMagneticButtons();
-  initTextSplit();
-  initCurtainEffect();
   initCountUp();
   initComparePop();
   initScienceCards();
@@ -603,57 +599,12 @@ function initScrollProgress() {
 }
 
 /* ============================================
-   CUSTOM CURSOR
-   ============================================ */
-function initCustomCursor() {
-  // Solo en dispositivos con puntero fino (mouse real) — evita carga inútil en touch
-  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  if (!cursor || !follower) return;
-
-  let mouseX = 0, mouseY = 0;
-  let followerX = 0, followerY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
-  });
-
-  // Smooth follower
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.12;
-    followerY += (mouseY - followerY) * 0.12;
-    follower.style.left = followerX + 'px';
-    follower.style.top = followerY + 'px';
-    requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
-
-  // Hover states
-  const hoverElements = document.querySelectorAll('a, button, .btn, .flavor__card, .problem__card, .benefit__card, .testimonial__card, .faq__question');
-  hoverElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('hover');
-      follower.classList.add('hover');
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('hover');
-      follower.classList.remove('hover');
-    });
-  });
-}
-
-/* ============================================
    CARD TILT EFFECT
    ============================================ */
 function initCardTilt() {
   if (window.innerWidth < 768) return;
 
-  const cards = document.querySelectorAll('.problem__card, .benefit__card, .solution__card');
+  const cards = document.querySelectorAll('.problem__card, .benefit__card');
 
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -672,77 +623,4 @@ function initCardTilt() {
       card.style.transform = '';
     });
   });
-}
-
-/* ============================================
-   MAGNETIC BUTTONS
-   ============================================ */
-function initMagneticButtons() {
-  if (window.innerWidth < 768) return;
-
-  const buttons = document.querySelectorAll('.btn');
-
-  buttons.forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, {
-        x: 0,
-        y: 0,
-        duration: 0.4,
-        ease: 'elastic.out(1, 0.5)',
-        clearProps: 'transform',
-      });
-    });
-  });
-}
-
-/* ============================================
-   TEXT SPLIT / WORD REVEAL ANIMATIONS
-   ============================================ */
-function initTextSplit() {
-  // Animate section titles word by word
-  const titles = document.querySelectorAll('.section__title');
-
-  titles.forEach(title => {
-    const text = title.textContent;
-    const words = text.split(' ');
-    title.innerHTML = words.map(word => `<span class="word-wrap"><span class="word">${word}</span></span>`).join(' ');
-
-    gsap.from(title.querySelectorAll('.word'), {
-      scrollTrigger: {
-        trigger: title,
-        start: 'top 85%',
-      },
-      y: 40,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.06,
-      ease: 'power3.out',
-    });
-  });
-}
-
-/* ============================================
-   CURTAIN EFFECT
-   ============================================ */
-function initCurtainEffect() {
-  if (window.innerWidth < 768) return;
-
-  const hero = document.getElementById('hero');
-  if (hero) {
-    ScrollTrigger.create({
-      trigger: hero,
-      start: 'bottom bottom',
-      end: () => '+=' + window.innerHeight * 0.3,
-      pin: true,
-      pinSpacing: false,
-    });
-  }
-
 }
