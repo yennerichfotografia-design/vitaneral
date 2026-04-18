@@ -662,6 +662,8 @@ body.menu-open { overflow: hidden; }
 .hero__badge-item {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  text-align: left;
   gap: 12px;
   padding: 12px 20px;
   background: rgba(255, 255, 255, 0.12);
@@ -672,6 +674,10 @@ body.menu-open { overflow: hidden; }
   color: rgba(255,255,255,0.9);
   font-size: 0.95rem;
   line-height: 1.25;
+}
+.hero__badge-item > span {
+  flex: 1;
+  min-width: 0;
 }
 .hero__badge-icon {
   width: 34px;
