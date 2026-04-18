@@ -1787,16 +1787,16 @@ button:focus-visible,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.35;
-  filter: saturate(0.5);
+  opacity: 0.6;
+  filter: saturate(0.85);
 }
 .science-section__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg,
-    rgba(26, 25, 28, 0.82) 0%,
-    rgba(26, 25, 28, 0.72) 50%,
-    rgba(26, 25, 28, 0.85) 100%);
+    rgba(56, 54, 60, 0.58) 0%,
+    rgba(56, 54, 60, 0.42) 50%,
+    rgba(56, 54, 60, 0.62) 100%);
 }
 .science-section > .container {
   position: relative;
