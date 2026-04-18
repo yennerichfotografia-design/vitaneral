@@ -33,9 +33,10 @@
   <meta name="theme-color" content="#F39600">
   <link rel="canonical" href="https://vitaneral.vercel.app/">
 
-  <!-- Preload recursos críticos -->
-  <link rel="preload" href="Imagenes/logo2.webp" as="image" type="image/webp">
+  <!-- Preload recursos críticos (above-fold) -->
   <link rel="preload" href="css/styles.css" as="style">
+  <link rel="preload" href="Imagenes/logo2.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="preload" href="Imagenes/hero-poster.jpg" as="image" fetchpriority="high">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
