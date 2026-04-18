@@ -2375,6 +2375,8 @@ button:focus-visible,
 
   .footer__links { width: 100%; }
   .footer__links h4 { display: none; } /* headers ocultos en mobile */
+  /* Oculta el primer bloque (Producto) — sus links ya están en el hamburger nav */
+  .footer__links:first-of-type { display: none; }
   .footer__links ul {
     display: flex;
     flex-direction: row;
@@ -2388,8 +2390,7 @@ button:focus-visible,
     padding: 4px 2px;
     justify-content: center;
   }
-  .footer__links ul a svg { display: none; } /* solo los chevrons de la lista, no social */
-  .footer__links + .footer__links { margin-top: -6px; }
+  .footer__links ul a svg { display: none; } /* chevrons ocultos */
 
   .footer__social {
     justify-content: center;
