@@ -2324,6 +2324,21 @@ button:focus-visible,
 .solution__product {
   position: relative;
   perspective: 1200px;
+  opacity: 0;
+  transform: translate3d(0, 32px, 0) scale(0.94);
+  transition: opacity 0.7s var(--ease-out),
+              transform 0.7s var(--ease-out);
+}
+.solution__product.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .solution__product {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 .solution__product::before {
   content: '';
@@ -2395,11 +2410,29 @@ button:focus-visible,
   padding: 36px 24px;
   background: var(--gray-100);
   border-radius: var(--radius);
-  transition: var(--transition);
+  opacity: 0;
+  transform: translate3d(0, 24px, 0) scale(0.96);
+  transition: opacity 0.55s var(--ease-out),
+              transform 0.55s var(--ease-out),
+              box-shadow 0.3s var(--ease-out);
+  will-change: transform, opacity;
 }
-.solution__feature-card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow);
+.solution__feature-card.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .solution__feature-card.is-visible:hover {
+    transform: translate3d(0, -4px, 0) scale(1);
+    box-shadow: var(--shadow);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .solution__feature-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 .solution__feature-icon {
   color: var(--primary);

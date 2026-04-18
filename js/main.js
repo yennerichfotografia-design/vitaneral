@@ -70,7 +70,41 @@ document.addEventListener('DOMContentLoaded', () => {
   initScienceCards();
   initCarouselHints();
   initResponsiveVideos();
+  initSolutionEntrance();
 });
+
+/* ============================================
+   SOLUCIÓN: entrance stagger para estuches y feature cards
+   ============================================ */
+function initSolutionEntrance() {
+  const products = document.querySelectorAll('.solution__product');
+  if (products.length) {
+    ScrollTrigger.create({
+      trigger: '.solution__products',
+      start: 'top 82%',
+      once: true,
+      onEnter: () => {
+        products.forEach((p, i) => {
+          setTimeout(() => p.classList.add('is-visible'), i * 140);
+        });
+      },
+    });
+  }
+
+  const features = document.querySelectorAll('.solution__feature-card');
+  if (features.length) {
+    ScrollTrigger.create({
+      trigger: '.solution__features',
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        features.forEach((f, i) => {
+          setTimeout(() => f.classList.add('is-visible'), i * 80);
+        });
+      },
+    });
+  }
+}
 
 /* ============================================
    VIDEOS RESPONSIVOS: swap src según viewport
