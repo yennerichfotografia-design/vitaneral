@@ -1492,12 +1492,11 @@ button:focus-visible,
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-.footer__brand { max-width: 320px; }
+.footer__brand { max-width: 360px; }
 .footer__logo {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  margin-bottom: 12px;
   margin-bottom: 16px;
 }
 .footer__logo-natufarma {
@@ -1507,22 +1506,64 @@ button:focus-visible,
 }
 .footer__brand p {
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.footer__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+.footer__location svg {
+  color: var(--primary-light);
+  flex-shrink: 0;
 }
 .footer__links h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
-.footer__links ul { display: flex; flex-direction: column; gap: 10px; }
+.footer__links h4 svg {
+  color: var(--primary-light);
+  flex-shrink: 0;
+}
+.footer__links ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 1rem;
-  transition: var(--transition);
+  transition: color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
 }
-.footer__links a:hover { color: var(--primary-light); }
+.footer__links a svg {
+  color: var(--primary);
+  flex-shrink: 0;
+  transition: transform 0.2s var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .footer__links a:hover {
+    color: var(--primary-light);
+  }
+  .footer__links a:hover svg {
+    transform: translateX(3px);
+  }
+}
 .footer__social {
   display: flex;
   gap: 12px;
@@ -2308,43 +2349,49 @@ button:focus-visible,
     font-size: 1rem;
   }
 
-  /* Footer mobile simplificado */
-  .footer { padding-top: 32px; }
+  /* Footer mobile con íconos */
+  .footer { padding-top: 40px; }
   .footer__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     grid-template-columns: none;
-    gap: 14px;
+    gap: 24px;
     text-align: center;
   }
   .footer__brand {
     grid-column: auto;
-    max-width: 380px;
-    margin-bottom: 4px;
+    max-width: 400px;
+    margin-bottom: 0;
   }
-  .footer__logo { justify-content: center; margin-bottom: 10px; }
-  .footer__brand p { font-size: 0.92rem; line-height: 1.55; margin: 0; }
+  .footer__logo { justify-content: center; margin-bottom: 12px; }
+  .footer__brand p { font-size: 0.95rem; line-height: 1.55; margin-bottom: 14px; }
+  .footer__location { margin: 0 auto; }
 
-  /* Oculta encabezados "Producto / Natufarma / Comprar" en mobile */
   .footer__links { width: 100%; }
-  .footer__links h4 { display: none; }
+  .footer__links h4 {
+    display: inline-flex;
+    justify-content: center;
+    font-size: 0.88rem;
+    margin-bottom: 12px;
+  }
   .footer__links ul {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     margin: 0;
   }
-  .footer__links a { font-size: 0.95rem; padding: 6px 4px; }
-  /* Juntar las 3 listas visualmente (sin separación vertical notoria) */
-  .footer__links + .footer__links { margin-top: -10px; }
+  .footer__links a {
+    font-size: 0.98rem;
+    padding: 6px 4px;
+    justify-content: center;
+  }
 
   .footer__social {
     justify-content: center;
-    gap: 12px;
-    margin: 6px 0 0;
+    gap: 14px;
+    margin: 16px 0 0;
   }
 
   .footer__disclaimer { padding: 12px 16px; font-size: 0.78rem; line-height: 1.45; }
