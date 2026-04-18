@@ -402,81 +402,25 @@ function initRevealAnimations() {
   }
 
 
-  // Benefits cards stagger
-  gsap.to('.benefit__card', {
-    scrollTrigger: {
-      trigger: '.benefits__grid',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    stagger: 0.12,
-    ease: 'power3.out',
-  });
+  // Helper: stagger .is-visible en grupos de cards
+  staggerCards('.benefits__grid', '.benefit__card', 90);
+  staggerCards('.testimonials__grid', '.testimonial__card', 100);
+  staggerCards('.faq__list', '.faq__item', 70);
+  staggerCards('.vamos-gallery__grid', '.vamos-gallery__item', 100);
+}
 
-  // Testimonial cards stagger
-  gsap.to('.testimonial__card', {
-    scrollTrigger: {
-      trigger: '.testimonials__grid',
-      start: 'top 80%',
+function staggerCards(triggerSel, itemSel, delay) {
+  const items = document.querySelectorAll(itemSel);
+  if (!items.length) return;
+  ScrollTrigger.create({
+    trigger: triggerSel,
+    start: 'top 82%',
+    once: true,
+    onEnter: () => {
+      items.forEach((el, i) => {
+        setTimeout(() => el.classList.add('is-visible'), i * delay);
+      });
     },
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: 'power3.out',
-  });
-
-  // FAQ items stagger
-  gsap.to('.faq__item', {
-    scrollTrigger: {
-      trigger: '.faq__list',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.5,
-    stagger: 0.1,
-    ease: 'power3.out',
-  });
-
-  // HMB cards stagger
-  gsap.to('.hmb-hero__card', {
-    scrollTrigger: {
-      trigger: '.hmb-hero__cards',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: 'power3.out',
-  });
-
-  // Compare table
-  gsap.to('.compare__table-wrapper', {
-    scrollTrigger: {
-      trigger: '.compare__table-wrapper',
-      start: 'top 80%',
-    },
-    opacity: 1,
-    y: 0,
-    duration: 0.8,
-    ease: 'power3.out',
-  });
-
-  // Table rows animate
-  gsap.to('.compare__table tbody tr', {
-    scrollTrigger: {
-      trigger: '.compare__table',
-      start: 'top 75%',
-    },
-    opacity: 1,
-    x: 0,
-    duration: 0.5,
-    stagger: 0.08,
-    ease: 'power3.out',
   });
 }
 
