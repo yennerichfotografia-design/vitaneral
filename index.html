@@ -852,6 +852,19 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
+  <!-- COOKIE CONSENT BANNER -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Aviso de cookies" aria-hidden="true">
+    <div class="cookie-banner__inner">
+      <p class="cookie-banner__text">
+        Usamos cookies para mejorar tu experiencia y analizar el tráfico del sitio.
+      </p>
+      <div class="cookie-banner__actions">
+        <button type="button" class="cookie-banner__btn cookie-banner__btn--reject" id="cookieReject">Rechazar</button>
+        <button type="button" class="cookie-banner__btn cookie-banner__btn--accept" id="cookieAccept">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- BOTÓN FLOTANTE MOBILE -->
   <a href="https://www.tiendanatufarma.com.ar/productos/vitaneral-x-240-grs-fuerza-y-vitalidad-15b2j/" target="_blank" rel="noopener" class="floating-cta" id="floatingCta">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
@@ -863,5 +876,44 @@
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script defer src="js/main.js"></script>
+
+  <!-- ============================================
+       ANALYTICS — activar reemplazando los IDs
+       ============================================ -->
+
+  <!-- Google Analytics 4 — REEMPLAZAR G-XXXXXXXXXX con el ID real
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
+  -->
+
+  <!-- Meta (Facebook) Pixel — REEMPLAZAR XXXXXXXXXXXXXXXXXX con el Pixel ID
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'XXXXXXXXXXXXXXXXXX');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
+  -->
+
+  <!-- Tracking de clicks en "Comprar ahora" (se activa con analytics) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('a[href*="tiendanatufarma.com.ar"]').forEach(link => {
+        link.addEventListener('click', () => {
+          if (typeof gtag === 'function') {
+            gtag('event', 'click_comprar', { event_category: 'conversion', event_label: 'tienda_online' });
+          }
+          if (typeof fbq === 'function') {
+            fbq('track', 'Lead');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada — Vitaneral</title>
+  <meta name="description" content="La página que buscás no existe. Volvé al inicio para conocer Vitaneral.">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #F39600;
+      --primary-dark: #D48200;
+      --gray-900: #46454B;
+      --gray-700: #52515A;
+      --warm-white: #F7F7FA;
+      --white: #FFFFFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--warm-white);
+      color: var(--gray-700);
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px;
+      min-height: 100svh;
+    }
+    .logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 40px;
+    }
+    .code {
+      font-family: 'Exo', sans-serif;
+      font-size: clamp(5rem, 20vw, 9rem);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h1 {
+      font-family: 'Exo', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    p {
+      font-size: 1.08rem;
+      line-height: 1.6;
+      max-width: 420px;
+      margin: 0 auto 36px;
+      color: var(--gray-700);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 100px;
+      background: var(--primary);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(243, 150, 0, 0.25);
+      transition: transform 0.18s ease-out, background 0.25s ease-out;
+    }
+    .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn:active { transform: scale(0.97); }
+  </style>
+</head>
+<body>
+  <picture>
+    <source srcset="Imagenes/logo-natufarma-web.webp" type="image/webp">
+    <img src="Imagenes/logo-natufarma-web.png" alt="Natufarma" class="logo">
+  </picture>
+  <div class="code" aria-hidden="true">404</div>
+  <h1>Página no encontrada</h1>
+  <p>La página que buscás no existe o fue movida. Volvé al inicio para conocer Vitaneral.</p>
+  <a href="/" class="btn">
+    Ir al inicio
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</body>
+</html>
