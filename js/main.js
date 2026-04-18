@@ -69,7 +69,26 @@ document.addEventListener('DOMContentLoaded', () => {
   initComparePop();
   initScienceCards();
   initCarouselHints();
+  initResponsiveVideos();
 });
+
+/* ============================================
+   VIDEOS RESPONSIVOS: swap src según viewport
+   ============================================ */
+function initResponsiveVideos() {
+  const videos = document.querySelectorAll('video[data-src-mobile]');
+  videos.forEach((video) => {
+    const w = window.innerWidth;
+    const src =
+      w < 768 ? video.dataset.srcMobile :
+      w < 1280 ? video.dataset.srcTablet :
+      video.dataset.srcDesktop;
+    if (src && video.getAttribute('src') !== src) {
+      video.setAttribute('src', src);
+      video.load();
+    }
+  });
+}
 
 /* ============================================
    SWIPE HINT: micro-bounce del primer card en carruseles mobile
