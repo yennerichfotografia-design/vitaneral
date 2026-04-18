@@ -410,7 +410,7 @@ function initRevealAnimations() {
     once: true,
     onEnter: () => {
       problemCards.forEach((card, i) => {
-        setTimeout(() => card.classList.add('is-visible'), i * 150);
+        setTimeout(() => card.classList.add('is-visible'), i * 180);
       });
     },
   });
