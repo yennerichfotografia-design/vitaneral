@@ -260,21 +260,43 @@ function initNavbar() {
 
   // Hamburger toggle
   if (hamburger && mobileMenu) {
+    const closeMenu = () => {
+      hamburger.classList.remove('active');
+      mobileMenu.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    };
+    const openMenu = () => {
+      hamburger.classList.add('active');
+      mobileMenu.classList.add('active');
+      document.body.classList.add('menu-open');
+    };
+
     hamburger.addEventListener('click', () => {
-      const willOpen = !mobileMenu.classList.contains('active');
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-      document.body.classList.toggle('menu-open', willOpen);
+      mobileMenu.classList.contains('active') ? closeMenu() : openMenu();
     });
 
     // Close on link click
     mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.classList.remove('menu-open');
-      });
+      link.addEventListener('click', closeMenu);
     });
+
+    // Close tapping outside the links (on background/overlay)
+    mobileMenu.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMenu();
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) closeMenu();
+    });
+
+    // Close when clicking the navbar logo while menu is open
+    const logo = document.querySelector('.navbar__logo');
+    if (logo) {
+      logo.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('active')) closeMenu();
+      });
+    }
   }
 
   // Smooth scroll for anchor links
