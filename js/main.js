@@ -261,8 +261,10 @@ function initNavbar() {
   // Hamburger toggle
   if (hamburger && mobileMenu) {
     hamburger.addEventListener('click', () => {
+      const willOpen = !mobileMenu.classList.contains('active');
       hamburger.classList.toggle('active');
       mobileMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open', willOpen);
     });
 
     // Close on link click
@@ -270,6 +272,7 @@ function initNavbar() {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
       });
     });
   }
