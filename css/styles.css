@@ -2349,50 +2349,54 @@ button:focus-visible,
     font-size: 1rem;
   }
 
-  /* Footer mobile con íconos */
-  .footer { padding-top: 40px; }
+  /* Footer mobile minimalista */
+  .footer { padding-top: 32px; }
   .footer__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     grid-template-columns: none;
-    gap: 24px;
+    gap: 14px;
     text-align: center;
+    padding-bottom: 28px;
   }
   .footer__brand {
     grid-column: auto;
-    max-width: 400px;
-    margin-bottom: 0;
+    max-width: 360px;
+    margin: 0;
   }
-  .footer__logo { justify-content: center; margin-bottom: 12px; }
-  .footer__brand p { font-size: 0.95rem; line-height: 1.55; margin-bottom: 14px; }
-  .footer__location { margin: 0 auto; }
+  .footer__logo { justify-content: center; margin-bottom: 10px; }
+  .footer__brand p { display: none; } /* desc omitida en mobile para compactar */
+  .footer__location {
+    margin: 0 auto;
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
 
   .footer__links { width: 100%; }
-  .footer__links h4 {
-    display: inline-flex;
-    justify-content: center;
-    font-size: 0.88rem;
-    margin-bottom: 12px;
-  }
+  .footer__links h4 { display: none; } /* headers ocultos en mobile */
   .footer__links ul {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 18px;
     margin: 0;
   }
   .footer__links a {
-    font-size: 0.98rem;
-    padding: 6px 4px;
+    font-size: 0.95rem;
+    padding: 4px 2px;
     justify-content: center;
   }
+  .footer__links a svg { display: none; } /* chevrons ocultos en mobile */
+  .footer__links + .footer__links { margin-top: -6px; }
 
   .footer__social {
     justify-content: center;
-    gap: 14px;
-    margin: 16px 0 0;
+    gap: 12px;
+    margin: 6px 0 0;
   }
+  .footer__social-link { width: 42px; height: 42px; }
 
   .footer__disclaimer { padding: 12px 16px; font-size: 0.78rem; line-height: 1.45; }
   .footer__bottom { padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); font-size: 0.82rem; }
