@@ -1,5 +1,7 @@
 # Backups
 backup_v*/
+Imagenes/backup_*/
+Video/*.backup.*
 
 # System
 .DS_Store

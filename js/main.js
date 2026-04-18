@@ -11,16 +11,43 @@ window.addEventListener('load', () => {
       preloader.classList.add('done');
     }, 800);
   }
+  // Recalcular posiciones de ScrollTrigger después del load completo
+  // (las imágenes lazy-loaded cambian la altura del documento)
+  if (window.ScrollTrigger) {
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+    setTimeout(() => ScrollTrigger.refresh(), 1200);
+  }
+});
+
+// Fallback de seguridad: si un .reveal queda invisible tras 2.5s, mostrarlo igual
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach((el) => {
+      const style = window.getComputedStyle(el);
+      if (parseFloat(style.opacity) < 0.1) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
+  }, 2500);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Lenis smooth scroll
+  // ScrollTrigger defaults: evitar recálculos intensos durante scroll
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  ScrollTrigger.defaults({ fastScrollEnd: true });
+
+  // Lenis smooth scroll — desactivado en touch para evitar titileo en mobile
+  const isTouch = matchMedia('(pointer: coarse)').matches;
   const lenis = new Lenis({
-    duration: 1.2,
+    duration: 1.1,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    smoothTouch: false,
+    touchMultiplier: 1.5,
+    syncTouch: false,
   });
 
   // Connect Lenis to GSAP ScrollTrigger
@@ -42,7 +69,128 @@ document.addEventListener('DOMContentLoaded', () => {
   initMagneticButtons();
   initTextSplit();
   initCurtainEffect();
+  initCountUp();
+  initComparePop();
+  initScienceCards();
+  initCarouselHints();
 });
+
+/* ============================================
+   SWIPE HINT: micro-bounce del primer card en carruseles mobile
+   ============================================ */
+function initCarouselHints() {
+  if (!matchMedia('(max-width: 900px)').matches) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const carousels = [
+    document.querySelector('.compare-visual'),
+    document.querySelector('.testimonials__grid'),
+  ].filter(Boolean);
+
+  carousels.forEach((el) => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 70%',
+      once: true,
+      onEnter: () => {
+        // pequeño delay para que el hint se vea después del reveal
+        setTimeout(() => el.classList.add('is-hinted'), 450);
+      },
+    });
+  });
+}
+
+/* ============================================
+   CIENCIA Y CERTIFICACIONES: stagger entry + icon pop
+   ============================================ */
+function initScienceCards() {
+  const cards = document.querySelectorAll('.science__card');
+  if (!cards.length) return;
+  ScrollTrigger.create({
+    trigger: '.science__grid',
+    start: 'top 85%',
+    once: true,
+    onEnter: () => {
+      cards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('is-visible'), i * 75);
+      });
+    },
+  });
+}
+
+/* ============================================
+   COUNT-UP (números que cuentan de 0 al valor final)
+   ============================================ */
+function initCountUp() {
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Targets: .count-up y .nutri__highlight-value
+  const targets = document.querySelectorAll('.count-up, .nutri__highlight-value');
+
+  targets.forEach((el) => {
+    const original = el.textContent.trim();
+    const match = original.match(/^(-?\d+(?:[.,]\d+)?)/);
+    if (!match) return;
+
+    const finalStr = match[1];
+    const sep = finalStr.includes(',') ? ',' : '.';
+    const finalNumber = parseFloat(finalStr.replace(',', '.'));
+    const decimals = finalStr.includes('.') || finalStr.includes(',')
+      ? finalStr.split(/[.,]/)[1].length
+      : 0;
+
+    if (prefersReduced) return; // respeta preferencia
+
+    // Formatea y muestra 0 inicial
+    el.textContent = formatNumber(0, decimals, sep);
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        const state = { val: 0 };
+        gsap.to(state, {
+          val: finalNumber,
+          duration: 1.4,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = formatNumber(state.val, decimals, sep);
+          },
+          onComplete: () => {
+            // asegura el valor exacto final (evita 2.559999)
+            el.textContent = formatNumber(finalNumber, decimals, sep);
+          },
+        });
+      },
+    });
+  });
+
+  function formatNumber(val, decimals, sep) {
+    const fixed = val.toFixed(decimals);
+    return decimals > 0 ? fixed.replace('.', sep) : Math.floor(val).toString();
+  }
+}
+
+/* ============================================
+   COMPARATIVA: pop-in de ✓/✗ al entrar la card al viewport
+   ============================================ */
+function initComparePop() {
+  const cards = document.querySelectorAll('.compare-visual__card');
+  cards.forEach((card) => {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 82%',
+      once: true,
+      onEnter: () => {
+        const spans = card.querySelectorAll('li span');
+        spans.forEach((span, i) => {
+          setTimeout(() => span.classList.add('pop-in'), i * 70);
+        });
+      },
+    });
+  });
+}
 
 /* ============================================
    NAVBAR
@@ -159,34 +307,51 @@ function initHeroAnimations() {
    SCROLL REVEAL ANIMATIONS
    ============================================ */
 function initRevealAnimations() {
-  // Generic reveals
-  const reveals = document.querySelectorAll('.reveal');
-  reveals.forEach((el) => {
-    gsap.to(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-    });
+  // Generic reveals — batched (1 trigger en vez de N para evitar recálculos en cada scroll)
+  ScrollTrigger.batch('.reveal', {
+    start: 'top 85%',
+    once: true,
+    onEnter: (batch) => {
+      gsap.to(batch, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.08,
+        ease: 'power3.out',
+        overwrite: 'auto',
+        onComplete: function () {
+          batch.forEach((el) => {
+            el.style.willChange = 'auto';
+          });
+        },
+      });
+    },
   });
 
-  // Problem cards stagger
-  gsap.to('.problem__card', {
-    scrollTrigger: {
-      trigger: '.problem__cards',
-      start: 'top 80%',
+  // Problem cards stagger — toggle CSS class so border-radius stays intact on composited layers
+  const problemCards = gsap.utils.toArray('.problem__card');
+  ScrollTrigger.create({
+    trigger: '.problem__cards',
+    start: 'top 80%',
+    once: true,
+    onEnter: () => {
+      problemCards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('is-visible'), i * 80);
+      });
     },
-    opacity: 1,
-    y: 0,
-    duration: 0.6,
-    stagger: 0.15,
-    ease: 'power3.out',
   });
+
+  // HMB image: reveal cinematográfico (clip-path + zoom-out)
+  const hmbImage = document.querySelector('.hmb-hero__image');
+  if (hmbImage) {
+    ScrollTrigger.create({
+      trigger: hmbImage,
+      start: 'top 75%',
+      once: true,
+      onEnter: () => hmbImage.classList.add('is-visible'),
+    });
+  }
+
 
   // Benefits cards stagger
   gsap.to('.benefit__card', {
@@ -309,17 +474,8 @@ function initParallax() {
     opacity: 0,
   });
 
-  // CTA section entrance
-  gsap.from('.cta-final__inner', {
-    scrollTrigger: {
-      trigger: '.section--cta',
-      start: 'top 80%',
-    },
-    opacity: 0,
-    scale: 0.95,
-    duration: 0.8,
-    ease: 'power3.out',
-  });
+  // CTA final: sin animación de entrada — es sección crítica, siempre visible
+  // (antes causaba intermitencia cuando ScrollTrigger fallaba)
 
 }
 
@@ -450,7 +606,8 @@ function initScrollProgress() {
    CUSTOM CURSOR
    ============================================ */
 function initCustomCursor() {
-  if (window.innerWidth < 768) return;
+  // Solo en dispositivos con puntero fino (mouse real) — evita carga inútil en touch
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
   const cursor = document.getElementById('cursor');
   const follower = document.getElementById('cursorFollower');
