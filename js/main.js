@@ -520,21 +520,9 @@ function initFAQ() {
    PARALLAX EFFECTS
    ============================================ */
 function initParallax() {
-  // Hero content fade out on scroll
-  gsap.to('.hero__content', {
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: '60% top',
-      scrub: 1,
-    },
-    y: -60,
-    opacity: 0,
-  });
-
-  // CTA final: sin animación de entrada — es sección crítica, siempre visible
-  // (antes causaba intermitencia cuando ScrollTrigger fallaba)
-
+  // Fade-out del hero al scrollear removido — causaba que el texto quedara invisible
+  // al volver al top en mobile Chrome con Lenis (scrub desincronizado).
+  // El CTA final tampoco usa animación de entrada por el mismo motivo.
 }
 
 /* ============================================
