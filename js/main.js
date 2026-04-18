@@ -7,8 +7,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    // Muestra apenas ~350ms para que se vea el logo + barra animada y desaparece
-    setTimeout(() => preloader.classList.add('done'), 350);
+    // ~900ms para que se vea el logo + barra animada cómodamente
+    setTimeout(() => preloader.classList.add('done'), 900);
   }
 });
 
