@@ -385,7 +385,7 @@ function initRevealAnimations() {
     once: true,
     onEnter: () => {
       problemCards.forEach((card, i) => {
-        setTimeout(() => card.classList.add('is-visible'), i * 80);
+        setTimeout(() => card.classList.add('is-visible'), i * 150);
       });
     },
   });
@@ -406,7 +406,7 @@ function initRevealAnimations() {
   staggerCards('.benefits__grid', '.benefit__card', 90);
   staggerCards('.testimonials__grid', '.testimonial__card', 100);
   staggerCards('.faq__list', '.faq__item', 70);
-  staggerCards('.vamos-gallery__grid', '.vamos-gallery__item', 100);
+  staggerCards('.vamos-gallery__grid', '.vamos-gallery__item', 160);
 }
 
 function staggerCards(triggerSel, itemSel, delay) {

@@ -597,14 +597,23 @@ button:focus-visible,
   flex-direction: column;
   gap: 20px;
   opacity: 0;
-  transform: translate3d(0, 24px, 0) scale(0.96);
-  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
-              transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translate3d(0, 48px, 0) scale(0.9);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.9s var(--ease-drawer);
   will-change: transform, opacity;
 }
-.problem__card.is-visible {
+/* Cada card entra desde un ángulo ligeramente distinto para feel más orgánico */
+.problem__card:nth-child(1) {
+  transform: translate3d(-16px, 48px, 0) scale(0.9) rotate(-1.5deg);
+}
+.problem__card:nth-child(3) {
+  transform: translate3d(16px, 48px, 0) scale(0.9) rotate(1.5deg);
+}
+.problem__card.is-visible,
+.problem__card:nth-child(1).is-visible,
+.problem__card:nth-child(3).is-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1) rotate(0);
 }
 .problem__card::before { display: none; }
 .problem__card-img {
@@ -619,13 +628,19 @@ button:focus-visible,
   height: 100%;
   object-fit: cover;
   object-position: center 25%;
-  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform: scale(1.14);
+  transition: transform 1.4s var(--ease-out);
 }
 .problem__card:nth-child(2) .problem__card-img img {
   object-position: center 15%;
 }
-.problem__card:hover .problem__card-img img {
-  transform: scale(1.04);
+.problem__card.is-visible .problem__card-img img {
+  transform: scale(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .problem__card.is-visible:hover .problem__card-img img {
+    transform: scale(1.04);
+  }
 }
 .problem__card-body {
   padding: 0 4px;
@@ -1807,16 +1822,38 @@ button:focus-visible,
 .vamos-gallery__item {
   overflow: hidden;
   opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.65s var(--ease-out),
-              transform 0.65s var(--ease-out);
+  transform: translate3d(0, 40px, 0) scale(0.88);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.9s var(--ease-drawer);
+  will-change: transform, opacity;
+}
+/* Alternating lateral entry */
+.vamos-gallery__item:nth-child(1) {
+  transform: translate3d(-32px, 40px, 0) scale(0.88) rotate(-1.2deg);
+}
+.vamos-gallery__item:nth-child(3) {
+  transform: translate3d(32px, 40px, 0) scale(0.88) rotate(1.2deg);
 }
 .vamos-gallery__item.is-visible {
   opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1) rotate(0);
+}
+/* Kenburns interno: imagen arranca más grande, se asienta */
+.vamos-gallery__item img {
+  transform: scale(1.1);
+  transition: transform 1.6s var(--ease-out);
+}
+.vamos-gallery__item.is-visible img {
   transform: scale(1);
 }
+@media (hover: hover) and (pointer: fine) {
+  .vamos-gallery__item.is-visible:hover img {
+    transform: scale(1.04);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .vamos-gallery__item { opacity: 1; transform: none; transition: none; }
+  .vamos-gallery__item,
+  .vamos-gallery__item img { opacity: 1; transform: none; transition: none; }
 }
 /* ============================================
    CIENCIA Y CERTIFICACIONES (dark section con video atmósfera)
@@ -1985,9 +2022,6 @@ button:focus-visible,
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
-}
-.vamos-gallery__item:hover img {
-  transform: scale(1.03);
 }
 .vamos-gallery__grid {
   display: grid;
