@@ -2346,7 +2346,17 @@ body.menu-open { overflow: hidden; }
     padding: clamp(15px, 3.5vw, 20px) clamp(24px, 5vw, 36px);
     font-size: clamp(0.98rem, 0.9rem + 0.3vw, 1.1rem);
   }
-  .hero__scroll-indicator { display: none; }
+  /* Scroll indicator mobile — visible y compacto */
+  .hero__scroll-indicator {
+    bottom: 20px;
+    font-size: 0.82rem;
+    gap: 4px;
+    opacity: 0.95;
+  }
+  .hero__scroll-indicator svg {
+    width: 20px;
+    height: 20px;
+  }
 
   /* NAVBAR MOBILE */
   .navbar {
