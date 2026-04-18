@@ -3,16 +3,17 @@
    GSAP Animations & Interactions
    ============================================ */
 
-// Preloader
-window.addEventListener('load', () => {
+// Preloader — se oculta apenas el DOM está listo (sin esperar a imágenes/videos)
+document.addEventListener('DOMContentLoaded', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
-    setTimeout(() => {
-      preloader.classList.add('done');
-    }, 800);
+    // Muestra apenas ~350ms para que se vea el logo + barra animada y desaparece
+    setTimeout(() => preloader.classList.add('done'), 350);
   }
-  // Recalcular posiciones de ScrollTrigger después del load completo
-  // (las imágenes lazy-loaded cambian la altura del documento)
+});
+
+// ScrollTrigger refresh post-load completo
+window.addEventListener('load', () => {
   if (window.ScrollTrigger) {
     requestAnimationFrame(() => ScrollTrigger.refresh());
     setTimeout(() => ScrollTrigger.refresh(), 1200);
