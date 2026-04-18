@@ -694,7 +694,7 @@ body.menu-open { overflow: hidden; }
 /* Scroll indicator */
 .hero__scroll-indicator {
   position: absolute;
-  bottom: 32px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -2391,9 +2391,9 @@ body.menu-open { overflow: hidden; }
     padding: clamp(15px, 3.5vw, 20px) clamp(24px, 5vw, 36px);
     font-size: clamp(0.98rem, 0.9rem + 0.3vw, 1.1rem);
   }
-  /* Scroll indicator mobile — visible y compacto */
+  /* Scroll indicator mobile — visible y compacto (más abajo para no pegarse a los badges) */
   .hero__scroll-indicator {
-    bottom: 20px;
+    bottom: 6px;
     font-size: 0.82rem;
     gap: 4px;
     opacity: 0.95;
