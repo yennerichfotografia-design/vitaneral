@@ -108,11 +108,27 @@ function initCookieBanner() {
 
 /* ============================================
    OPTIMIZACIÓN LOW-END: pausar videos fuera del viewport
-   Ahorra CPU/GPU significativo en mobiles de gama baja
+   + Detecta Save-Data / conexión lenta y pausa videos
    ============================================ */
 function initVideoPauseOffscreen() {
   const videos = document.querySelectorAll('video[autoplay]');
-  if (!videos.length || !('IntersectionObserver' in window)) return;
+  if (!videos.length) return;
+
+  // Detectar si el usuario tiene Save-Data activo o red 2G/3G
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const saveData = conn && (conn.saveData || /(slow-2g|2g|3g)/.test(conn.effectiveType || ''));
+
+  if (saveData) {
+    // Pausar y mostrar solo el poster — no cargar video en data saver
+    videos.forEach((v) => {
+      v.pause();
+      v.removeAttribute('autoplay');
+      v.preload = 'none';
+    });
+    return;
+  }
+
+  if (!('IntersectionObserver' in window)) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

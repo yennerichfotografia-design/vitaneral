@@ -176,6 +176,42 @@ button:focus-visible,
   margin: 0 auto;
   padding: 0 clamp(24px, 4.5vw, 64px);
 }
+/* ULTRA-WIDE (monitores 2K+): padding lateral generoso para centrar mejor */
+@media (min-width: 1920px) {
+  .container { max-width: 1600px; }
+}
+
+/* PRINT: estilos básicos para imprimir info nutricional, FAQ, etc. */
+@media print {
+  body {
+    color: #000;
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .navbar,
+  .floating-cta,
+  .back-to-top,
+  .cookie-banner,
+  .hero__video-bg,
+  .science-section__bg,
+  .flavor-hero__bg,
+  .nutri-section__bg,
+  .preloader,
+  video,
+  .hero__scroll-indicator,
+  .compare-visual__swipe-hint,
+  .testimonials__swipe-hint {
+    display: none !important;
+  }
+  .hero { min-height: auto; padding: 20px 0; color: #000; }
+  .hero__title, .section__title, h1, h2, h3 { color: #000; break-after: avoid; }
+  a { color: #000; text-decoration: underline; }
+  .btn { display: none !important; }
+  section { break-inside: avoid; page-break-inside: avoid; padding: 16px 0; }
+  .nutri__table { min-width: auto; font-size: 10pt; }
+  img { max-width: 100%; height: auto; break-inside: avoid; }
+}
 
 /* BUTTONS */
 .btn {
@@ -2433,6 +2469,24 @@ body.menu-open { overflow: hidden; }
     width: 20px;
     height: 20px;
   }
+}
+
+/* LANDSCAPE MOBILE (teléfono rotado): hero compacto */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .hero {
+    min-height: auto;
+    padding-top: 72px;
+    padding-bottom: 32px;
+  }
+  .hero__title { font-size: clamp(1.5rem, 3.5vh, 2rem); margin-bottom: 8px; }
+  .hero__desc { font-size: 1rem; margin-bottom: 14px; }
+  .hero__badges { margin-top: 18px; gap: 8px; }
+  .hero__badge-item { padding: 8px 12px; font-size: 0.78rem; }
+  .hero__badge-icon { width: 22px; height: 22px; }
+  .hero__scroll-indicator { display: none; }
+  /* Carruseles aún más compactos en landscape */
+  .flavor-hero { min-height: auto; }
+  .flavor-hero__content { padding: 48px 20px 36px; }
 
   /* NAVBAR MOBILE */
   .navbar {
