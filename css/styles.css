@@ -431,6 +431,7 @@ button:focus-visible,
    ============================================ */
 .hero {
   min-height: 100vh;
+  min-height: 100svh; /* small viewport height — constante aunque aparezca/se oculte la URL bar */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2145,9 +2146,10 @@ button:focus-visible,
   .section__title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
   .section__desc { font-size: 1.05rem; }
 
-  /* HERO MOBILE */
+  /* HERO MOBILE — tamaños fijos (sin vw) para rendering consistente en todos los dispositivos */
   .hero {
     min-height: 100vh;
+    min-height: 100svh;
     padding-top: 70px;
     padding-bottom: 40px;
   }
@@ -2155,20 +2157,25 @@ button:focus-visible,
     padding-top: 20px;
   }
   .hero__title {
-    font-size: clamp(2.15rem, 8vw, 2.9rem);
+    font-size: 2.2rem; /* fijo: ~35px igual en iPhone y Android */
     line-height: 1.18;
     letter-spacing: -0.015em;
     margin-bottom: 16px;
   }
   .hero__badges {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-top: 44px;
+    margin-top: 40px;
+    max-width: 100%;
   }
   .hero__badge-item {
     padding: 12px 14px;
     font-size: 0.9rem;
     gap: 10px;
-    border-radius: 12px;
+    border-radius: 14px;
+    justify-content: center;
+    text-align: left;
   }
   .hero__badge-icon {
     width: 28px;
@@ -2179,17 +2186,24 @@ button:focus-visible,
     height: 16px;
   }
   .hero__desc {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.55;
-    margin: 0 auto 18px;
+    margin: 0 auto 20px;
     max-width: 100%;
   }
   .hero__cta {
     width: 100%;
     justify-content: center;
-    padding: 16px 32px;
+    padding: 18px 32px;
+    font-size: 1.05rem;
   }
   .hero__scroll-indicator { display: none; }
+
+  /* Pantallas muy chicas (<360px): reducir apenas el título para que mantenga 4 líneas */
+  @media (max-width: 359px) {
+    .hero__title { font-size: 1.95rem; }
+    .hero__badge-item { font-size: 0.82rem; padding: 10px 12px; }
+  }
 
   /* NAVBAR MOBILE */
   .navbar {
