@@ -2487,7 +2487,10 @@ body.menu-open { overflow: hidden; }
   /* Carruseles aún más compactos en landscape */
   .flavor-hero { min-height: auto; }
   .flavor-hero__content { padding: 48px 20px 36px; }
+}
 
+/* MOBILE PORTRAIT — resto de reglas mobile (navbar, cards, footer, etc.) */
+@media (max-width: 767px) {
   /* NAVBAR MOBILE */
   .navbar {
     padding: 12px 0;
