@@ -2388,7 +2388,7 @@ button:focus-visible,
     padding: 4px 2px;
     justify-content: center;
   }
-  .footer__links a svg { display: none; } /* chevrons ocultos en mobile */
+  .footer__links ul a svg { display: none; } /* solo los chevrons de la lista, no social */
   .footer__links + .footer__links { margin-top: -6px; }
 
   .footer__social {
