@@ -339,13 +339,21 @@ function initNavbar() {
     }
   }
 
-  // Smooth scroll for anchor links
+  // Smooth scroll for anchor links — usa Lenis cuando está activo, fallback nativo
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const href = this.getAttribute('href');
+      if (href === '#' || href.length < 2) return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      const offset = 72; // altura aprox del navbar fijo
+      if (typeof lenis !== 'undefined' && lenis.scrollTo) {
+        lenis.scrollTo(target, { offset: -offset, duration: 1.2 });
+      } else {
+        const rect = target.getBoundingClientRect();
+        const top = rect.top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
       }
     });
   });
