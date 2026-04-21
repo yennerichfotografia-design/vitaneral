@@ -71,6 +71,9 @@ html {
   overflow-x: hidden;
   width: 100%;
   background: var(--gray-900); /* matches footer — evita banda blanca en overscroll iOS */
+  /* Garantiza scroll touch en todos los dispositivos (fix gama baja Android) */
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
 }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto; }
@@ -81,10 +84,11 @@ body {
   background: var(--white);
   line-height: 1.75; /* generoso para lectura +60 */
   overflow-x: hidden;
-  overscroll-behavior-y: none; /* reduce bounce scroll en iOS */
   letter-spacing: -0.01em;
   width: 100%;
   min-width: 320px;
+  /* NO usar overscroll-behavior-y: none — puede bloquear scroll en Android gama baja */
+  touch-action: manipulation;
 }
 
 /* PRELOADER */
@@ -97,6 +101,15 @@ body {
   align-items: center;
   justify-content: center;
   transition: opacity 0.25s ease, visibility 0.25s ease;
+  /* Safety: si JS falla totalmente, CSS oculta el preloader a los 4s */
+  animation: preloaderSafetyHide 0s linear 4s forwards;
+}
+@keyframes preloaderSafetyHide {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 .preloader.done {
   opacity: 0;

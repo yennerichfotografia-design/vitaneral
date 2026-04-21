@@ -3,14 +3,22 @@
    GSAP Animations & Interactions
    ============================================ */
 
-// Preloader — se oculta apenas el DOM está listo (sin esperar a imágenes/videos)
-document.addEventListener('DOMContentLoaded', () => {
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    // ~900ms para que se vea el logo + barra animada cómodamente
-    setTimeout(() => preloader.classList.add('done'), 900);
-  }
-});
+// Preloader — triple seguridad para que NUNCA quede bloqueando el scroll
+(function () {
+  var hidePreloader = function () {
+    var p = document.getElementById('preloader');
+    if (p && !p.classList.contains('done')) p.classList.add('done');
+  };
+  // 1. DOM listo → esconder después de 900ms
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(hidePreloader, 900);
+  });
+  // 2. Window load → esconder ya
+  window.addEventListener('load', hidePreloader);
+  // 3. Timeout absoluto de 3s desde el parseo del script
+  //    (si hay error de JS, el preloader se oculta igual)
+  setTimeout(hidePreloader, 3000);
+})();
 
 // ScrollTrigger refresh post-load completo
 window.addEventListener('load', () => {
@@ -40,21 +48,26 @@ document.addEventListener('DOMContentLoaded', () => {
   ScrollTrigger.config({ ignoreMobileResize: true });
   ScrollTrigger.defaults({ fastScrollEnd: true });
 
-  // Lenis smooth scroll — desactivado en touch para evitar titileo en mobile
-  const isTouch = matchMedia('(pointer: coarse)').matches;
-  const lenis = new Lenis({
-    duration: 1.1,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    smoothTouch: false,
-    touchMultiplier: 1.5,
-    syncTouch: false,
-  });
-
-  // Connect Lenis to GSAP ScrollTrigger
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
+  // Lenis smooth scroll: SOLO en dispositivos con mouse/trackpad
+  // En touch devices (mobile/tablet) se usa scroll nativo del OS
+  // Esto evita que Lenis bloquee el scroll en Android de gama baja
+  const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+  let lenis = null;
+  if (!isTouch && typeof Lenis !== 'undefined') {
+    try {
+      lenis = new Lenis({
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } catch (e) {
+      console.warn('Lenis init failed, using native scroll:', e);
+      lenis = null;
+    }
+  }
 
   initNavbar();
   initRevealAnimations();
