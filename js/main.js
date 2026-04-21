@@ -41,7 +41,27 @@ window.addEventListener('load', () => {
   }, 2500);
 });
 
+// Detección de dispositivo de baja gama: poco RAM, pocos cores o red lenta
+function isLowEndDevice() {
+  var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  var saveData = conn && (conn.saveData || /(slow-2g|2g|3g)/.test(conn.effectiveType || ''));
+  var lowMem = (navigator.deviceMemory && navigator.deviceMemory <= 4);
+  var lowCPU = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+  return !!(saveData || (lowMem && lowCPU));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Modo low-end: pausar videos, degradar visualmente
+  if (isLowEndDevice()) {
+    document.documentElement.classList.add('low-end');
+    document.querySelectorAll('video[autoplay]').forEach(v => {
+      v.pause();
+      v.removeAttribute('autoplay');
+      v.preload = 'none';
+    });
+  }
+
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
   // ScrollTrigger defaults: evitar recálculos intensos durante scroll
@@ -69,23 +89,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  initNavbar();
-  initRevealAnimations();
-  initHeroAnimations();
-  initFAQ();
-  initParallax();
-  initFlavorHover();
-  initFloatingCta();
-  initNutriTabs();
-  initScrollProgress();
-  initCardTilt();
-  initCountUp();
-  initComparePop();
-  initScienceCards();
-  initCarouselHints();
-  initResponsiveVideos();
-  initSolutionEntrance();
-  initVideoPauseOffscreen();
+  // Inicializaciones con try/catch — si una falla, las demás siguen funcionando
+  var initFns = [
+    ['navbar', initNavbar], ['reveal', initRevealAnimations],
+    ['hero', initHeroAnimations], ['faq', initFAQ],
+    ['parallax', initParallax], ['flavor', initFlavorHover],
+    ['floatingCta', initFloatingCta], ['nutriTabs', initNutriTabs],
+    ['scrollProgress', initScrollProgress], ['cardTilt', initCardTilt],
+    ['countUp', initCountUp], ['comparePop', initComparePop],
+    ['science', initScienceCards], ['carouselHints', initCarouselHints],
+    ['responsiveVideos', initResponsiveVideos], ['solution', initSolutionEntrance],
+    ['videoPause', initVideoPauseOffscreen],
+  ];
+  initFns.forEach(function (pair) {
+    try { pair[1](); } catch (e) { console.warn('init ' + pair[0] + ' failed:', e); }
+  });
 });
 
 /* ============================================

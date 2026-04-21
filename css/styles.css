@@ -91,6 +91,42 @@ body {
   touch-action: manipulation;
 }
 
+/* MODO LOW-END: dispositivos con poco RAM/CPU (detectado via JS con .low-end en html)
+   Desactiva animaciones infinite y efectos caros para no bloquear scroll */
+.low-end * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+}
+.low-end .solution__product img,
+.low-end .science-section__bg video,
+.low-end .hero__video-bg video {
+  animation: none !important;
+}
+.low-end [class*="backdrop"],
+.low-end .hero__badge-item,
+.low-end .flavor-tab,
+.low-end .science__card,
+.low-end .navbar__mobile {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* FIX low-end Android: backdrop-filter es muy caro en GPU vieja y puede bloquear scroll.
+   Lo reemplazamos por fondos opacos en dispositivos táctiles. */
+@media (hover: none) and (pointer: coarse) {
+  .hero__badge-item,
+  .flavor-tab,
+  .science-section .science__card,
+  .navbar__mobile {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .hero__badge-item { background: rgba(0, 0, 0, 0.35); }
+  .flavor-tab { background: rgba(255, 255, 255, 0.25); }
+  .science-section .science__card { background: rgba(255, 255, 255, 0.12); }
+  .navbar__mobile { background: var(--primary); }
+}
+
 /* PRELOADER */
 .preloader {
   position: fixed;
